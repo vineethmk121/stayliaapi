@@ -1,0 +1,10 @@
+node_modules/**/*
+build/**/*
+certs/**/*
+
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*

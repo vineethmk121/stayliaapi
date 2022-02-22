@@ -88,9 +88,6 @@ export default interface bedRoomTypeData extends Document {
 export default interface furnishingTypeData extends Document {
     title: String;
 }
-export default interface nationalitiesData extends Document {
-    title: String;
-}
 export default interface tagsData extends Document {
     title: String;
     description: String;
@@ -98,19 +95,4 @@ export default interface tagsData extends Document {
 export default interface additionalInfoData extends Document {
     title: String;
     description: String;
-}
-export default interface termsAndConditionData extends Document {
-    title: String;
-    description: String;
-}
-export default interface agencyData extends Document {
-    title: String;
-}
-export default interface languagesData extends Document {
-    country: String;
-    language: String;
-}
-export default interface specialitiesData extends Document {
-    title: String;
-    icon: String;
 }

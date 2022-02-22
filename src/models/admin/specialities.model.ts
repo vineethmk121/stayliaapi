@@ -8,7 +8,7 @@ const specialitiesSchema = new Schema(
             type: String,
             required: false
         },
-        icon: {
+        specialtyIcon: {
             type: String,
             required: false
         },

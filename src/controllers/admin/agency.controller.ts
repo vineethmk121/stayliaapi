@@ -15,7 +15,7 @@ export default {
             }
             const existingAgency = await agencyModel.findOne({ title: req.body.title }).lean();
             if (existingAgency) {
-                let result = makeApiResponce('This agency is Already Exsit, Please try another agency!', 1, StatusCodes.BAD_REQUEST, {});
+                let result = makeApiResponce('This Agency is Already Exsit, Please try another agency!', 1, StatusCodes.BAD_REQUEST, {});
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
             const agency: agencyData = new agencyModel(req.body);
@@ -26,7 +26,7 @@ export default {
                 title: agency.title,
                 createdBy: agency.createdBy
             };
-            let result = makeApiResponce('agency Added Successfully', 1, StatusCodes.OK, bedRoomResponce);
+            let result = makeApiResponce('Agency Added Successfully', 1, StatusCodes.OK, bedRoomResponce);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -38,10 +38,10 @@ export default {
         try {
             const agency: agencyData = await agencyModel.findById(req.params.id).lean();
             if (!agency) {
-                let result = makeApiResponce('agency Not Found', 1, StatusCodes.NOT_FOUND, {});
+                let result = makeApiResponce('Agency Not Found', 1, StatusCodes.NOT_FOUND, {});
                 return res.status(StatusCodes.NOT_FOUND).json(result);
             }
-            let result = makeApiResponce('agency Founds Successfully', 1, StatusCodes.OK, agency);
+            let result = makeApiResponce('Agency Founds Successfully', 1, StatusCodes.OK, agency);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -53,10 +53,10 @@ export default {
         try {
             var agency: agencyData = await agencyModel.find({ delBit: false }).lean();
             if (!agency) {
-                let result = makeApiResponce('agencys Not Found', 1, StatusCodes.NOT_FOUND, {});
+                let result = makeApiResponce('Agencies Not Found', 1, StatusCodes.NOT_FOUND, {});
                 return res.status(StatusCodes.NOT_FOUND).json(result);
             }
-            let result = makeApiResponce('agencys Found Successfully', 1, StatusCodes.OK, agency);
+            let result = makeApiResponce('Agencies Found Successfully', 1, StatusCodes.OK, agency);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -69,10 +69,10 @@ export default {
             req.body.updatedBy = req.user;
             var agency: agencyData = await agencyModel.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-password').lean();
             if (!agency) {
-                let result = makeApiResponce('agency Not Exists', 1, StatusCodes.BAD_REQUEST, agency);
+                let result = makeApiResponce('Agency Not Exists', 1, StatusCodes.BAD_REQUEST, agency);
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
-            let result = makeApiResponce('agency Updated Successfully', 1, StatusCodes.OK, agency);
+            let result = makeApiResponce('Agency Updated Successfully', 1, StatusCodes.OK, agency);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -84,10 +84,10 @@ export default {
         try {
             var agency: agencyData = await agencyModel.findByIdAndUpdate(req.params.id, { delBit: true }, { new: true }).select('-password').lean();
             if (!agency) {
-                let result = makeApiResponce('agency Not Exists', 1, StatusCodes.BAD_REQUEST, agency);
+                let result = makeApiResponce('Agency Not Exists', 1, StatusCodes.BAD_REQUEST, agency);
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
-            let result = makeApiResponce('agency Deleted Successfully', 1, StatusCodes.OK, agency);
+            let result = makeApiResponce('Agency Deleted Successfully', 1, StatusCodes.OK, agency);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);

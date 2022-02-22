@@ -147,58 +147,5 @@ export default {
             return { error };
         }
         return { value };
-    },
-    validateNationalitiesSchema(body: any) {
-        const schema = Joi.object().keys({
-            title: Joi.string().required(),
-            description: Joi.string().required()
-        });
-        const { error, value } = schema.validate(body);
-        if (error && error.details) {
-            return { error };
-        }
-        return { value };
-    },
-    validateTermsAndConditionSchema(body: any) {
-        const schema = Joi.object().keys({
-            title: Joi.string().required()
-        });
-        const { error, value } = schema.validate(body);
-        if (error && error.details) {
-            return { error };
-        }
-        return { value };
-    },
-    validateAgencySchema(body: any) {
-        const schema = Joi.object().keys({
-            title: Joi.string().required()
-        });
-        const { error, value } = schema.validate(body);
-        if (error && error.details) {
-            return { error };
-        }
-        return { value };
-    },
-    validatelanguagesSchema(body: any) {
-        const schema = Joi.object().keys({
-            country: Joi.string().required(),
-            language: Joi.string().required()
-        });
-        const { error, value } = schema.validate(body);
-        if (error && error.details) {
-            return { error };
-        }
-        return { value };
-    },
-    validateSpecialitiesSchema(body: any) {
-        const schema = Joi.object().keys({
-            title: Joi.string().required(),
-            icon: Joi.string().required()
-        });
-        const { error, value } = schema.validate(body);
-        if (error && error.details) {
-            return { error };
-        }
-        return { value };
     }
 };

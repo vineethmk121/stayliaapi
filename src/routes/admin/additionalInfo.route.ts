@@ -3,7 +3,7 @@ import additionalInfoController from '../../controllers/admin/additionalInfo.con
 import passport from 'passport';
 
 export const addInfoRouter: express.Router = express.Router();
-addInfoRouter.use(passport.authenticate('adminUser', { session: false, failureRedirect: '/failure' }));
+// addInfoRouter.use(passport.authenticate('adminUser', { session: false, failureRedirect: '/failure' }));
 
 addInfoRouter.post('/addInfo', additionalInfoController.addInfo);
 addInfoRouter.put('/updateAddInfo/:id', additionalInfoController.updateAddInfo);

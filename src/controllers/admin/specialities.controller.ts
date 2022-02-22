@@ -1,9 +1,10 @@
 import { StatusCodes } from 'http-status-codes';
 import { Request, Response, NextFunction } from 'express';
 import validation from '../../middlewares/user.validation';
-import specialitiesModel from '../../models/admin/amenities.model';
+import specialitiesModel from '../../models/admin/specialities.model';
 import { makeApiResponce } from '../../libraries/responce';
 import specialitiesData from '../../libraries/interfaces';
+import { devConfig } from '../../config/config';
 
 export default {
     async addSpecialities(req: Request, res: Response, next: NextFunction) {
@@ -20,11 +21,14 @@ export default {
             }
             const specialities: specialitiesData = new specialitiesModel(req.body);
             specialities.createdBy = req.user;
+            if (req.file) {
+                specialities.specialtyIcon = `${devConfig.getImagesPath.specialityIcon}/` + req.file.filename;
+            }
             await specialities.save();
             var specialitiesResponce: any = {
                 _id: specialities._id,
                 title: specialities.title,
-                icon: specialities.icon,
+                specialtyIcon: specialities.specialtyIcon,
                 createdBy: specialities.createdBy
             };
             let result = makeApiResponce('specialities Added Successfully', 1, StatusCodes.OK, specialitiesResponce);
@@ -68,6 +72,9 @@ export default {
     async updateSpecialities(req: Request, res: Response, next: NextFunction) {
         try {
             req.body.updatedBy = req.user;
+            if (req.file) {
+                req.body.specialtyIcon = `${devConfig.getImagesPath.specialityIcon}/` + req.file.filename;
+            }
             var specialities: specialitiesData = await specialitiesModel.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-password').lean();
             if (!specialities) {
                 let result = makeApiResponce('specialities Not Exists', 1, StatusCodes.BAD_REQUEST, specialities);

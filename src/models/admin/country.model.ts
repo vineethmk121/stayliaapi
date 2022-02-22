@@ -15,12 +15,12 @@ const countrySchema = new Schema(
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users',
-            required: false
+            required: true
         },
         updatedBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users',
-            required: false
+            required: true
         },
         statusBit: {
             type: String,

@@ -5,8 +5,9 @@ const { Schema } = mongoose;
 const languagesSchema = new Schema(
     {
         country: {
-            type: String,
-            required: true
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'country',
+            required: false
         },
         language: {
             type: String,

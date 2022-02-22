@@ -15,7 +15,7 @@ export default {
             }
             const existingtermsAndCondition = await termsAndConditionModel.findOne({ title: req.body.title }).lean();
             if (existingtermsAndCondition) {
-                let result = makeApiResponce('This termsAndCondition is Already Exsit, Please try another termsAndCondition!', 1, StatusCodes.BAD_REQUEST, {});
+                let result = makeApiResponce('This Term And Condition is Already Exsit, Please try another termsAndCondition!', 1, StatusCodes.BAD_REQUEST, {});
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
             const termsAndCondition: termsAndConditionData = new termsAndConditionModel(req.body);
@@ -27,7 +27,7 @@ export default {
                 description: termsAndCondition.description,
                 createdBy: termsAndCondition.createdBy
             };
-            let result = makeApiResponce('termsAndCondition Added Successfully', 1, StatusCodes.OK, termsAndConditionResponce);
+            let result = makeApiResponce('Term And Condition Added Successfully', 1, StatusCodes.OK, termsAndConditionResponce);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -39,10 +39,10 @@ export default {
         try {
             const termsAndCondition: termsAndConditionData = await termsAndConditionModel.findById(req.params.id).lean();
             if (!termsAndCondition) {
-                let result = makeApiResponce('termsAndCondition Not Found', 1, StatusCodes.NOT_FOUND, {});
+                let result = makeApiResponce('Term And Condition Not Found', 1, StatusCodes.NOT_FOUND, {});
                 return res.status(StatusCodes.NOT_FOUND).json(result);
             }
-            let result = makeApiResponce('termsAndCondition Founds Successfully', 1, StatusCodes.OK, termsAndCondition);
+            let result = makeApiResponce('Term And Condition Founds Successfully', 1, StatusCodes.OK, termsAndCondition);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -54,10 +54,10 @@ export default {
         try {
             var termsAndCondition: termsAndConditionData = await termsAndConditionModel.find({ delBit: false }).lean();
             if (!termsAndCondition) {
-                let result = makeApiResponce('termsAndConditions Not Found', 1, StatusCodes.NOT_FOUND, {});
+                let result = makeApiResponce('Terms And Conditions Not Found', 1, StatusCodes.NOT_FOUND, {});
                 return res.status(StatusCodes.NOT_FOUND).json(result);
             }
-            let result = makeApiResponce('termsAndConditions Found Successfully', 1, StatusCodes.OK, termsAndCondition);
+            let result = makeApiResponce('Terms And Conditions Found Successfully', 1, StatusCodes.OK, termsAndCondition);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -70,10 +70,10 @@ export default {
             req.body.updatedBy = req.user;
             var termsAndCondition: termsAndConditionData = await termsAndConditionModel.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-password').lean();
             if (!termsAndCondition) {
-                let result = makeApiResponce('termsAndCondition Not Exists', 1, StatusCodes.BAD_REQUEST, termsAndCondition);
+                let result = makeApiResponce('Term And Condition Not Exists', 1, StatusCodes.BAD_REQUEST, termsAndCondition);
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
-            let result = makeApiResponce('termsAndCondition Updated Successfully', 1, StatusCodes.OK, termsAndCondition);
+            let result = makeApiResponce('Term And Condition Updated Successfully', 1, StatusCodes.OK, termsAndCondition);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -85,10 +85,10 @@ export default {
         try {
             var termsAndCondition: termsAndConditionData = await termsAndConditionModel.findByIdAndUpdate(req.params.id, { delBit: true }, { new: true }).select('-password').lean();
             if (!termsAndCondition) {
-                let result = makeApiResponce('termsAndCondition Not Exists', 1, StatusCodes.BAD_REQUEST, termsAndCondition);
+                let result = makeApiResponce('Term And Condition Not Exists', 1, StatusCodes.BAD_REQUEST, termsAndCondition);
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
-            let result = makeApiResponce('termsAndCondition Deleted Successfully', 1, StatusCodes.OK, termsAndCondition);
+            let result = makeApiResponce('Term And Condition Deleted Successfully', 1, StatusCodes.OK, termsAndCondition);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
