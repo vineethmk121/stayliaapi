@@ -119,7 +119,7 @@ export default {
     async viewUser(req: Request, res: Response, next: NextFunction) {
         try {
             // FETCH THE USER
-            var user: IUser = await UserModel.findById(req.params.id).select('-password').lean();
+            var user: IUser = await UserModel.findById(req.params.id).select('-password').populate('country').lean();
             if (!user) {
                 let result = makeApiResponce('User Not Found', 1, StatusCodes.NOT_FOUND, user);
                 return res.status(StatusCodes.NOT_FOUND).json(result);

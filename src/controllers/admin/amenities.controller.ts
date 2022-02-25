@@ -4,6 +4,7 @@ import validation from '../../middlewares/user.validation';
 import amenitiesModel from '../../models/admin/amenities.model';
 import { makeApiResponce } from '../../libraries/responce';
 import amenitiesData from '../../libraries/interfaces';
+import { devConfig } from '../../config/config';
 
 export default {
     async addAmenity(req: Request, res: Response, next: NextFunction) {
@@ -20,6 +21,9 @@ export default {
             }
             const amenity: amenitiesData = new amenitiesModel(req.body);
             amenity.createdBy = req.user;
+            if (req.file) {
+                amenity.amenitiesIcon = `${devConfig.getImagesPath.amenitiesIcon}/` + req.file.filename;
+            }
             await amenity.save();
             var amenityResponce: any = {
                 _id: amenity._id,
@@ -68,6 +72,9 @@ export default {
     async updateAmenity(req: Request, res: Response, next: NextFunction) {
         try {
             req.body.updatedBy = req.user;
+            if (req.file) {
+                req.body.amenitiesIcon = `${devConfig.getImagesPath.amenitiesIcon}/` + req.file.filename;
+            }
             var amenity: amenitiesData = await amenitiesModel.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-password').lean();
             if (!amenity) {
                 let result = makeApiResponce('Amenity Not Exists', 1, StatusCodes.BAD_REQUEST, amenity);

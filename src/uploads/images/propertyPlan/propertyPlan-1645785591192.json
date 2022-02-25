@@ -1,0 +1,2406 @@
+{
+	"info": {
+		"_postman_id": "8935c784-bcc6-4ab3-aaaf-c6d60c45c40a",
+		"name": "Staylia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "addUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NDQ4MTE0MywiZXhwIjoxNjQ0NTY3NTQzfQ.DrORZwSwtiRGLMOYRXw3FqlBFVlNUj7RHR-qcOiSios",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fName",
+									"value": "anas",
+									"type": "default"
+								},
+								{
+									"key": "lName",
+									"value": "sheikh",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "ranaansg3@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "userType",
+									"value": "agent",
+									"type": "default"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "default"
+								},
+								{
+									"key": "mobile",
+									"value": "03010951616",
+									"type": "default"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "1996-02-12",
+									"type": "default"
+								},
+								{
+									"key": "profilePic",
+									"type": "file",
+									"src": "/C:/Users/Admin/Pictures/field-6574455__480.jpg"
+								},
+								{
+									"key": "parentAgency",
+									"value": "",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "building",
+									"value": "123, bb",
+									"type": "default"
+								},
+								{
+									"key": "state",
+									"value": "punjab",
+									"type": "default"
+								},
+								{
+									"key": "locality",
+									"value": "gujranwala",
+									"type": "default"
+								},
+								{
+									"key": "country",
+									"value": "620f7dcf0189e9269c84a0b4",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "default"
+								},
+								{
+									"key": "userRole",
+									"value": "dataAdmin",
+									"type": "default"
+								},
+								{
+									"key": "language",
+									"value": "620f88224137c1313424ce98",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5555/admin/users/addUser",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"users",
+								"addUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "abc121@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5555/admin/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUSer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NDM5MDkzNywiZXhwIjoxNjQ0NDc3MzM3fQ.cOqP4LnDlrl7YcAxL2DjCLud8WSCdO4BkUMQpMbmXp4",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fName",
+									"value": "ali",
+									"type": "default"
+								},
+								{
+									"key": "updatedBy",
+									"value": "",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/users/updateUser/62039cc43c082b134cd45bb3",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"updateUser",
+								"62039cc43c082b134cd45bb3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NTU5OTkwOSwiZXhwIjoxNjQ1Njg2MzA5fQ.15D_4X_3Th4M6r3_LYTDujf2AYAr0SMMp8Z4CSYHKiM",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/admin/users/viewUser/6213712415b61f292c327b7d",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"viewUser",
+								"6213712415b61f292c327b7d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBjMWIyM2RmYTYzMTg2ODBkZDUwMCIsImlhdCI6MTY0NDIxNjgwMywiZXhwIjoxNjQ0MzAzMjAzfQ.i6YNKbeunISRbI3zOX0Tr3lBvnE2IPUXbEwKo7U7N0w",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "oldPassword",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/users/changePassword",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NDM5MDkzNywiZXhwIjoxNjQ0NDc3MzM3fQ.cOqP4LnDlrl7YcAxL2DjCLud8WSCdO4BkUMQpMbmXp4",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/admin/users/deleteUser/620395fc570f182a782e7985",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"deleteUser",
+								"620395fc570f182a782e7985"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NDM5MDkzNywiZXhwIjoxNjQ0NDc3MzM3fQ.cOqP4LnDlrl7YcAxL2DjCLud8WSCdO4BkUMQpMbmXp4",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/users/allUsers",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"allUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgotPassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "munirw000@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/users/forgotPassword",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verifyEmail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/users/verifyEmail/62139e0efdaf8726cc935371",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"verifyEmail",
+								"62139e0efdaf8726cc935371"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "mobileApis",
+			"item": [
+				{
+					"name": "Mobile Auth",
+					"item": [
+						{
+							"name": "signup",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"email\":\"waqas.munir@appcrates.com\",\r\n\"fullName\":\"waqas munir\",\r\n\"mobile\":\"03423635932\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/api/users/signup",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verifyOtp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mobile\": \"3423635932\",\r\n    \"otp\": \"0EE24C\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/api/users/verifyOtp",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"verifyOtp"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "roles",
+			"item": []
+		},
+		{
+			"name": "amenities",
+			"item": [
+				{
+					"name": "addAmenity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "crodd",
+									"type": "text"
+								},
+								{
+									"key": "amenityIcon",
+									"type": "file",
+									"src": "/C:/Users/Admin/Pictures/field-6574455__480.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/amenity/addAmenity",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"amenity",
+								"addAmenity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewAmenity",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/admin/amenity/viewAmenity/620d07f6c8eb7c30f4df8958",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"amenity",
+								"viewAmenity",
+								"620d07f6c8eb7c30f4df8958"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allAmenity",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/admin/amenity/allAmenity",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"amenity",
+								"allAmenity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAmenity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "anas",
+									"type": "text"
+								},
+								{
+									"key": "amenityIcon",
+									"value": "",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/amenity/updateAmenity/620d07f6c8eb7c30f4df8958",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"amenity",
+								"updateAmenity",
+								"620d07f6c8eb7c30f4df8958"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAmenity",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/admin/amenity/deleteAmenity/620d07f6c8eb7c30f4df8958",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"amenity",
+								"deleteAmenity",
+								"620d07f6c8eb7c30f4df8958"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "overView",
+			"item": [
+				{
+					"name": "addOverView",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "3rd overViews",
+									"type": "text"
+								},
+								{
+									"key": "overViewIcon",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/Stelia.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/overView/addOverView",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"overView",
+								"addOverView"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOverView",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "updated",
+									"type": "text"
+								},
+								{
+									"key": "overViewIcon",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/overView/updateOverView/620d0aaba3f87725147dc886",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"overView",
+								"updateOverView",
+								"620d0aaba3f87725147dc886"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewOverView",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/overView/viewOverView/620d0aaba3f87725147dc886",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"overView",
+								"viewOverView",
+								"620d0aaba3f87725147dc886"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allOverViews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/overView/allOverViews",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"overView",
+								"allOverViews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOverView",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/overView/deleteOverView/620d0aaba3f87725147dc886",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"overView",
+								"deleteOverView",
+								"620d0aaba3f87725147dc886"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "propertyType",
+			"item": [
+				{
+					"name": "addPropertyType",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "3rd property type",
+									"type": "default"
+								},
+								{
+									"key": "filter",
+									"value": "aho aho",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/propertyType/addPropertyType",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"propertyType",
+								"addPropertyType"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePropertyType",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "updated",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/propertyType/updatePropertyType/620d0c6d8e0d3900f4dc72ef",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"propertyType",
+								"updatePropertyType",
+								"620d0c6d8e0d3900f4dc72ef"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewPropertyType",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/propertyType/viewPropertyType/620d0c6d8e0d3900f4dc72ef",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"propertyType",
+								"viewPropertyType",
+								"620d0c6d8e0d3900f4dc72ef"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allPropertyTypes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/propertyType/allPropertyTypes",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"propertyType",
+								"allPropertyTypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePropertyType",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/propertyType/deletePropertyType/620d0c6d8e0d3900f4dc72ef",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"propertyType",
+								"deletePropertyType",
+								"620d0c6d8e0d3900f4dc72ef"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bedRoomType",
+			"item": [
+				{
+					"name": "addBedRoomType",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "2nd bed type",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/bedRoom/addBedRoomType",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"bedRoom",
+								"addBedRoomType"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewBedRoomType",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/bedRoom/viewBedRoomType/620d0e1dab040e2d1873537a",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"bedRoom",
+								"viewBedRoomType",
+								"620d0e1dab040e2d1873537a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allBedRoomType",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/bedRoom/allBedRoomType",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"bedRoom",
+								"allBedRoomType"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBedRoomType",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "updated",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/bedRoom/updateBedRoomType/620d0e1dab040e2d1873537a",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"bedRoom",
+								"updateBedRoomType",
+								"620d0e1dab040e2d1873537a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBedRoomType",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/bedRoom/deleteBedRoomType/620d0e1dab040e2d1873537a",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"bedRoom",
+								"deleteBedRoomType",
+								"620d0e1dab040e2d1873537a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "agency",
+			"item": [
+				{
+					"name": "addAgency",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "3st agency",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5555/admin/agency/addAgency",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"agency",
+								"addAgency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewAgency",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/agency/viewAgency/620f79473be80b47580554d7",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"agency",
+								"viewAgency",
+								"620f79473be80b47580554d7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allAgency",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/agency/allAgency",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"agency",
+								"allAgency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAgency",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "updated",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5555/admin/agency/updateAgency/620f79413be80b47580554d4",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"agency",
+								"updateAgency",
+								"620f79413be80b47580554d4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAgency",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/agency/deleteAgency/620f79413be80b47580554d4",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"agency",
+								"deleteAgency",
+								"620f79413be80b47580554d4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Specialities",
+			"item": [
+				{
+					"name": "addSpecialities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NTE4OTcxNywiZXhwIjoxNjQ1Mjc2MTE3fQ.-X3FMCs64ngkYUhZAqC7TMtPAB3gYlbK4qDUeHZkbC0",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "1st ",
+									"type": "text"
+								},
+								{
+									"key": "specialtyIcon",
+									"type": "file",
+									"src": "/C:/Users/Admin/Pictures/field-6574455__480.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/specialities/addSpecialities",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"specialities",
+								"addSpecialities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewSpecialities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/specialities/viewSpecialities/",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"specialities",
+								"viewSpecialities",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allSpecialities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/specialities/allSpecialities",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"specialities",
+								"allSpecialities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSpecialities",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "updated",
+									"type": "text"
+								},
+								{
+									"key": "specialtyIcon",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5555/admin/Specialities/updateSpecialities/",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"Specialities",
+								"updateSpecialities",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSpecialities",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/specialities/deleteSpecialities/",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"specialities",
+								"deleteSpecialities",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "country",
+			"item": [
+				{
+					"name": "addCountry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NTQ0MjkyNCwiZXhwIjoxNjQ1NTI5MzI0fQ.jygP44W_WGOBO3jmKRcacHSMzKsxx6EIHCs9zq58zz4",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "countryName",
+									"value": "US",
+									"type": "text"
+								},
+								{
+									"key": "countryCode",
+									"value": "001",
+									"type": "text"
+								},
+								{
+									"key": "countryFlag",
+									"type": "file",
+									"src": "/C:/Users/Admin/Pictures/download (2).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/country/addCountry",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"country",
+								"addCountry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewCountry",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/country/viewCountry/620f7dfd0189e9269c84a0ba",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"country",
+								"viewCountry",
+								"620f7dfd0189e9269c84a0ba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allCountry",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/country/allCountry",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"country",
+								"allCountry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCountry",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "countryName",
+									"value": "updated",
+									"type": "default"
+								},
+								{
+									"key": "countryCode",
+									"value": "updated",
+									"type": "default"
+								},
+								{
+									"key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NTQ0MjkyNCwiZXhwIjoxNjQ1NTI5MzI0fQ.jygP44W_WGOBO3jmKRcacHSMzKsxx6EIHCs9zq58zz4",
+									"value": "",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5555/admin/country/updateCountry/620f7dfd0189e9269c84a0ba",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"country",
+								"updateCountry",
+								"620f7dfd0189e9269c84a0ba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCountry",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/country/deleteCountry/620f7e4c0189e9269c84a0bf",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"country",
+								"deleteCountry",
+								"620f7e4c0189e9269c84a0bf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "language",
+			"item": [
+				{
+					"name": "addLanguages",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NTE4NTk0NCwiZXhwIjoxNjQ1MjcyMzQ0fQ.ynaxSZ8GVfl53WaufXUEb7EE6PKc_pqEusXKuyJLKwY",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "country",
+									"value": "indai",
+									"type": "default"
+								},
+								{
+									"key": "language",
+									"value": "hinidi",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5555/admin/languages/addLanguages",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"languages",
+								"addLanguages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewLanguages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NTE4NTk0NCwiZXhwIjoxNjQ1MjcyMzQ0fQ.ynaxSZ8GVfl53WaufXUEb7EE6PKc_pqEusXKuyJLKwY",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:5555/admin/languages/viewLanguages/620f898f7423341d0481f842",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"languages",
+								"viewLanguages",
+								"620f898f7423341d0481f842"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allLanguages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NTE4NTk0NCwiZXhwIjoxNjQ1MjcyMzQ0fQ.ynaxSZ8GVfl53WaufXUEb7EE6PKc_pqEusXKuyJLKwY",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:5555/admin/languages/allLanguages",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"languages",
+								"allLanguages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateLanguages",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDBkMWU3MTllZjk4OTk0NjhkZWZhZSIsImlhdCI6MTY0NTE4NTk0NCwiZXhwIjoxNjQ1MjcyMzQ0fQ.ynaxSZ8GVfl53WaufXUEb7EE6PKc_pqEusXKuyJLKwY",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "country",
+									"value": "country is updated 2nd times",
+									"type": "default"
+								},
+								{
+									"key": "language",
+									"value": "language is updated 2nd times",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5555/admin/languages/updateLanguages/620f895b550c4822a44f4563",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"languages",
+								"updateLanguages",
+								"620f895b550c4822a44f4563"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLanguages",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/languages/deleteLanguages/620f898f7423341d0481f842",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"languages",
+								"deleteLanguages",
+								"620f898f7423341d0481f842"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "furnishType",
+			"item": [
+				{
+					"name": "addFurnishType",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "3rd furnish",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/furnish/addFurnishType",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"furnish",
+								"addFurnishType"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewFurnishType",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/furnish/viewFurnishType/620d10138e53ed0cdc47c2ba",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"furnish",
+								"viewFurnishType",
+								"620d10138e53ed0cdc47c2ba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateFurnishType",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "updated",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/furnish/updateFurnishType/620d10138e53ed0cdc47c2ba",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"furnish",
+								"updateFurnishType",
+								"620d10138e53ed0cdc47c2ba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFurnishType",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/furnish/deleteFurnishType/620d10138e53ed0cdc47c2ba",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"furnish",
+								"deleteFurnishType",
+								"620d10138e53ed0cdc47c2ba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allFurnishTypes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/furnish/allFurnishTypes",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"furnish",
+								"allFurnishTypes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "nationalities",
+			"item": [
+				{
+					"name": "addNationalities",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "4rd nationality",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "ssddd",
+									"type": "default"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5555/admin/nationality/addNationality",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"nationality",
+								"addNationality"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewNationalities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/nationality/viewNationality/620f6a73550d0f1d2c39f249",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"nationality",
+								"viewNationality",
+								"620f6a73550d0f1d2c39f249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateNationalities",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "updated",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5555/admin/nationality/updateNationality/620f6a73550d0f1d2c39f249",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"nationality",
+								"updateNationality",
+								"620f6a73550d0f1d2c39f249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteNationalities",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/nationality/deleteNationality/620f6863cfa13f4488b42e2c",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"nationality",
+								"deleteNationality",
+								"620f6863cfa13f4488b42e2c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allNationalities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/nationality/allNationality",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"nationality",
+								"allNationality"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tags",
+			"item": [
+				{
+					"name": "addTag",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "3rd tag",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "asdf",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/tag/addTag",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"tag",
+								"addTag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewTag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/tag/viewTag/620d11a2b3ba5638980a242d",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"tag",
+								"viewTag",
+								"620d11a2b3ba5638980a242d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTag",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "updated",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/tag/updateTag/620d11a2b3ba5638980a242d",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"tag",
+								"updateTag",
+								"620d11a2b3ba5638980a242d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTag",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/tag/deleteTag/620d11a2b3ba5638980a242d",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"tag",
+								"deleteTag",
+								"620d11a2b3ba5638980a242d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allTags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/tag/allTags",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"tag",
+								"allTags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TermsAndCondition",
+			"item": [
+				{
+					"name": "addtermsAndCondition",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "this fifth",
+									"type": "default"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5555/admin/termsAndCondition/addTermsAndCondition",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"termsAndCondition",
+								"addTermsAndCondition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewTermsAndCondition",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/termsAndCondition/viewTermsAndCondition/620f74bc240b461f90eb50b0",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"termsAndCondition",
+								"viewTermsAndCondition",
+								"620f74bc240b461f90eb50b0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTermsAndCondition",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "updated",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5555/admin/termsAndCondition/updateTermsAndCondition/620f74bc240b461f90eb50b0",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"termsAndCondition",
+								"updateTermsAndCondition",
+								"620f74bc240b461f90eb50b0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTermsAndCondition",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/termsAndCondition/deleteTermsAndCondition/620f74f7240b461f90eb50b6",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"termsAndCondition",
+								"deleteTermsAndCondition",
+								"620f74f7240b461f90eb50b6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allTermsAndCondition",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5555/admin/termsAndCondition/allTermsAndCondition",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"admin",
+								"termsAndCondition",
+								"allTermsAndCondition"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "additionalInfo",
+			"item": [
+				{
+					"name": "addInfo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "1st info",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "asdfsdf",
+									"type": "default"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/tag/addTag",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"tag",
+								"addTag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewAddInfo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/additionalInfo/viewAddInfo",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"additionalInfo",
+								"viewAddInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAddInfo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "updated",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/additionalInfo/updateAddInfo/620e6f89ec126435b8117d6d",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"additionalInfo",
+								"updateAddInfo",
+								"620e6f89ec126435b8117d6d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAddInfo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/admin/deleteAddInfo/620e6f89ec126435b8117d6d",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"deleteAddInfo",
+								"620e6f89ec126435b8117d6d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allAddInfo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}admin/additionalInfo/allAddInfo",
+							"host": [
+								"{{localhost}}admin"
+							],
+							"path": [
+								"additionalInfo",
+								"allAddInfo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "property",
+			"item": [
+				{
+					"name": "addProperty",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "1st property",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "lahore main hai ye",
+									"type": "text"
+								},
+								{
+									"key": "flatNumber",
+									"value": "108A",
+									"type": "text"
+								},
+								{
+									"key": "street",
+									"value": "12B",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "lahore",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "punjab",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "62137b1ffdaf8726cc935366",
+									"type": "text"
+								},
+								{
+									"key": "countryCode",
+									"value": "0092",
+									"type": "text"
+								},
+								{
+									"key": "sellingPrice",
+									"value": "600.52",
+									"type": "text"
+								},
+								{
+									"key": "discountPrice",
+									"value": "200.02",
+									"type": "text"
+								},
+								{
+									"key": "deposite",
+									"value": "250.20",
+									"type": "text"
+								},
+								{
+									"key": "rent",
+									"value": "100.20",
+									"type": "text"
+								},
+								{
+									"key": "additionalInfo",
+									"value": "620e6c01a4985009a4b43609",
+									"type": "text"
+								},
+								{
+									"key": "propertyType",
+									"value": "comercial",
+									"type": "text"
+								},
+								{
+									"key": "overView[0]",
+									"value": "620d0a9ba3f87725147dc87e",
+									"type": "text"
+								},
+								{
+									"key": "amenities[0]",
+									"value": "620d07c0c8eb7c30f4df8952",
+									"type": "text"
+								},
+								{
+									"key": "bedRoomTypes[0]",
+									"value": "620d0dcc88a8d0399cf84fb7",
+									"type": "text"
+								},
+								{
+									"key": "furnishingTypes[0]",
+									"value": "620d10068e53ed0cdc47c2b4",
+									"type": "text"
+								},
+								{
+									"key": "tags[0]",
+									"value": "620d1190b3ba5638980a2427",
+									"type": "text"
+								},
+								{
+									"key": "gallaryImages",
+									"type": "file",
+									"src": "/C:/Users/Admin/Pictures/tree-736885__480.jpg"
+								},
+								{
+									"key": "sliderImages",
+									"type": "file",
+									"src": "/C:/Users/Admin/Pictures/2.jpg"
+								},
+								{
+									"key": "propertyPlan",
+									"type": "file",
+									"src": "/C:/Users/Admin/Pictures/Staylia.postman_collection.json"
+								},
+								{
+									"key": "agency",
+									"value": "620f78e73be80b47580554d0",
+									"type": "text"
+								},
+								{
+									"key": "agent",
+									"value": "country Agent",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/admin/property/addProperty",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"admin",
+								"property",
+								"addProperty"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -23,11 +23,21 @@ export const devConfig: any = {
 
     imagesPath: {
         userProfilePic: `${ROUTE_IMAGE_PATH}/profilePic`,
-        imagePropertyName2: `${ROUTE_IMAGE_PATH}/folderName`
+        specialtyIcon: `${ROUTE_IMAGE_PATH}/specialtyIcon`,
+        overViewIcon: `${ROUTE_IMAGE_PATH}/overViewIcon`,
+        amenitiesIcon: `${ROUTE_IMAGE_PATH}/amenitiesIcon`,
+        gallaryImages: `${ROUTE_IMAGE_PATH}/gallaryImages`,
+        sliderImages: `${ROUTE_IMAGE_PATH}/sliderImages`,
+        propertyPlan: `${ROUTE_IMAGE_PATH}/propertyPlan`
     },
     getImagesPath: {
         userProfilePic: `${BASE_IMAGE_URL}/profilePic`,
-        imagePropertyName2: `${BASE_IMAGE_URL}/folderName`
+        specialtyIcon: `${BASE_IMAGE_URL}/specialtyIcon`,
+        overViewIcon: `${BASE_IMAGE_URL}/overViewIcon`,
+        amenitiesIcon: `${BASE_IMAGE_URL}/amenitiesIcon`,
+        gallaryImages: `${BASE_IMAGE_URL}/gallaryImages`,
+        sliderImages: `${BASE_IMAGE_URL}/sliderImages`,
+        propertyPlan: `${BASE_IMAGE_URL}/propertyPlan`
     },
     email: {
         SERVICE: 'Gmail',

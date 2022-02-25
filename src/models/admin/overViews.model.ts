@@ -8,7 +8,7 @@ const overViewSchema = new Schema(
             type: String,
             required: false
         },
-        icon: {
+        overViewIcon: {
             type: String,
             required: false
         },

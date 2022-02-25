@@ -29,7 +29,8 @@ const PropertySchema = new Schema(
             require: false
         },
         country: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'country',
             require: false
         },
         countryCode: {
@@ -52,7 +53,8 @@ const PropertySchema = new Schema(
         },
         additionalInfo: [
             {
-                type: String,
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'additionalInfo',
                 default: false,
                 require: false
             }
@@ -65,51 +67,63 @@ const PropertySchema = new Schema(
         ],
         overView: [
             {
-                type: String,
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'overView',
                 require: false
             }
         ],
         amenities: [
             {
-                type: String
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'amenities',
+                default: null
             }
         ],
         bedRoomTypes: [
             {
-                type: String
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'bedRoomType',
+                default: null
             }
         ],
         furnishingTypes: [
             {
-                type: String,
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'furnishingType',
+                default: null,
                 require: false
             }
         ],
         tags: [
             {
-                type: String,
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'tags',
+                default: null,
                 require: false
             }
         ],
         gallaryImages: [
             {
                 type: String,
-                default: false
+                default: null
             }
         ],
         sliderImages: [
             {
                 type: String,
-                default: false
+                default: null
             }
         ],
-        propertyPlan: {
-            type: String,
-            default: false
-        },
+        propertyPlan: [
+            {
+                type: String,
+                default: null
+            }
+        ],
         agency: {
-            type: String,
-            default: false
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'agency',
+            default: null
         },
         agent: {
             type: String,

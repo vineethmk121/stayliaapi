@@ -76,7 +76,7 @@ export default {
     validateAmenitySchema(body: any) {
         const schema = Joi.object().keys({
             title: Joi.string().required(),
-            icon: Joi.string().required()
+            amenitiesIcon: Joi.string()
         });
         const { error, value } = schema.validate(body);
         if (error && error.details) {
@@ -107,7 +107,7 @@ export default {
     validateOverViewSchema(body: any) {
         const schema = Joi.object().keys({
             title: Joi.string().required(),
-            icon: Joi.string().required()
+            overViewIcon: Joi.string()
         });
         const { error, value } = schema.validate(body);
         if (error && error.details) {
@@ -141,6 +141,50 @@ export default {
         const schema = Joi.object().keys({
             title: Joi.string().required(),
             description: Joi.string().required()
+        });
+        const { error, value } = schema.validate(body);
+        if (error && error.details) {
+            return { error };
+        }
+        return { value };
+    },
+    validatePropertySchema(body: any) {
+        const schema = Joi.object().keys({
+            title: Joi.string().required(),
+            description: Joi.string().required(),
+            flatNumber: Joi.string().required(),
+            street: Joi.string().required(),
+            city: Joi.string().required(),
+            state: Joi.string().required(),
+            country: Joi.any().required(),
+            countryCode: Joi.string().required(),
+            sellingPrice: Joi.number().required(),
+            discountPrice: Joi.number().required(),
+            deposite: Joi.number().required(),
+            rent: Joi.number().required(),
+            additionalInfo: Joi.any().required(),
+            propertyType: Joi.string().required(),
+            overView: Joi.any().required(),
+            amenities: Joi.any().required(),
+            bedRoomTypes: Joi.any().required(),
+            furnishingTypes: Joi.any().required(),
+            tags: Joi.any().required(),
+            gallaryImages: Joi.string().optional(),
+            sliderImages: Joi.string().optional(),
+            propertyPlan: Joi.string().optional(),
+            agency: Joi.any().required(),
+            agent: Joi.string().required()
+        });
+        const { error, value } = schema.validate(body);
+        if (error && error.details) {
+            return { error };
+        }
+        return { value };
+    },
+    validateSpecialitiesSchema(body: any) {
+        const schema = Joi.object().keys({
+            title: Joi.string().required(),
+            specialtyIcon: Joi.string()
         });
         const { error, value } = schema.validate(body);
         if (error && error.details) {

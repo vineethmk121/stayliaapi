@@ -9,8 +9,18 @@ var storage = diskStorage({
     destination: (req, file, cb) => {
         if (file.fieldname == 'profilePic') {
             upload_dir = `${devConfig.imagesPath.userProfilePic}`;
-        } else if (file.fieldname == 'floor_image' || file.fieldname == 'property_image' || file.fieldname == 'property_vedio') {
-            upload_dir = `${devConfig.images_path.PROPERTY}`;
+        } else if (file.fieldname == 'specialtyIcon') {
+            upload_dir = `${devConfig.imagesPath.specialtyIcon}`;
+        } else if (file.fieldname == 'overViewIcon') {
+            upload_dir = `${devConfig.imagesPath.overViewIcon}`;
+        } else if (file.fieldname == 'amenitiesIcon') {
+            upload_dir = `${devConfig.imagesPath.specialtyIcon}`;
+        } else if (file.fieldname == 'gallaryImages') {
+            upload_dir = `${devConfig.imagesPath.gallaryImages}`;
+        } else if (file.fieldname == 'sliderImages') {
+            upload_dir = `${devConfig.imagesPath.sliderImages}`;
+        } else if (file.fieldname == 'propertyPlan') {
+            upload_dir = `${devConfig.imagesPath.propertyPlan}`;
         }
 
         sync(upload_dir); //create directories if not exist

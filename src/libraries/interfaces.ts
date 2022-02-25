@@ -16,7 +16,7 @@ export default interface IUser extends Document {
     building: String;
     state: String;
     locality: String;
-    country: String;
+    country: any;
     fcmToken: String;
     updatedBy: any;
     emailVerified: String;
@@ -44,23 +44,23 @@ export default interface propertyData extends Document {
     street: String;
     city: String;
     state: String;
-    country: String;
+    country: any;
     countryCode: String;
     sellingPrice: [Number];
     discountPrice: [Number];
     deposite: [Number];
     rent: [Number];
-    additionalInfo: String;
-    propType: String;
-    overView: String;
-    amenities: String;
-    bedRoomTypes: String;
-    furnishingTypes: String;
-    tags: String;
+    additionalInfo: any;
+    propertyType: String;
+    overView: [any];
+    amenities: [any];
+    bedRoomTypes: [any];
+    furnishingTypes: [any];
+    tags: [any];
     gallaryImages: String;
     sliderImages: String;
     propertyPlan: String;
-    agency: String;
+    agency: any;
     agent: String;
     isApproved: Boolean;
     createdBy: any;
@@ -76,11 +76,15 @@ export default interface propertyTypeData extends Document {
 }
 export default interface overViewData extends Document {
     title: String;
-    icon: String;
+    overViewIcon: String;
+}
+export default interface specialitiesData extends Document {
+    title: String;
+    specialtyIcon: String;
 }
 export default interface amenitiesData extends Document {
     title: String;
-    icon: String;
+    amenitiesIcon: String;
 }
 export default interface bedRoomTypeData extends Document {
     title: String;

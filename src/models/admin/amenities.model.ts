@@ -8,7 +8,7 @@ const amenitiesSchema = new Schema(
             type: String,
             required: false
         },
-        icon: {
+        amenitiesIcon: {
             type: String,
             required: false
         },

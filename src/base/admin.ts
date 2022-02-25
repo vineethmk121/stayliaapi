@@ -9,6 +9,7 @@ import { amenityRouter } from '../routes/admin/amenities.route';
 import { furnishingTypeRouter } from '../routes/admin/furnishingType.route';
 import { bedRoomTypeRouter } from '../routes/admin/bedRoomType.route';
 import { addInfoRouter } from '../routes/admin/additionalInfo.route';
+import { propertyRouter } from '../routes/admin/property.route';
 export const adminRouter = express.Router();
 
 adminRouter.use('/users', userRouter);
@@ -21,3 +22,4 @@ adminRouter.use('/amenity', amenityRouter);
 adminRouter.use('/furnish', furnishingTypeRouter);
 adminRouter.use('/bedRoom', bedRoomTypeRouter);
 adminRouter.use('/additionalInfo', addInfoRouter);
+adminRouter.use('/property', propertyRouter);

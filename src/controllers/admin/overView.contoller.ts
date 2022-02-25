@@ -4,6 +4,7 @@ import validation from '../../middlewares/user.validation';
 import overViewModel from '../../models/admin/overViews.model';
 import { makeApiResponce } from '../../libraries/responce';
 import overViewData from '../../libraries/interfaces';
+import { devConfig } from '../../config/config';
 
 export default {
     async addOverView(req: Request, res: Response, next: NextFunction) {
@@ -19,6 +20,9 @@ export default {
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
             const overView: overViewData = new overViewModel(req.body);
+            if (req.file) {
+                overView.overViewIcon = `${devConfig.getImagesPath.overViewIcon}/` + req.file.filename;
+            }
             overView.createdBy = req.user;
             await overView.save();
             var overViewResponce: any = {
@@ -68,6 +72,9 @@ export default {
     async updateOverView(req: Request, res: Response, next: NextFunction) {
         try {
             req.body.updatedBy = req.user;
+            if (req.file) {
+                req.body.overViewIcon = `${devConfig.getImagesPath.overViewIcon}/` + req.file.filename;
+            }
             var overView: overViewData = await overViewModel.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-password').lean();
             if (!overView) {
                 let result = makeApiResponce('OverView Not Exists', 1, StatusCodes.BAD_REQUEST, overView);

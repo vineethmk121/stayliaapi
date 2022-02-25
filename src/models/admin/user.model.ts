@@ -79,8 +79,9 @@ const UserSchema = new Schema(
             type: String,
             require: false
         },
-        Country: {
-            type: String,
+        country: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'country',
             require: false
         },
         emailNotification: {

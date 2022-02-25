@@ -1,11 +1,12 @@
 import express from 'express';
 import overViewController from '../../controllers/admin/overView.contoller';
 import passport from 'passport';
+import upload from '../../libraries/multer';
 
 export const overViewRouter: express.Router = express.Router();
 overViewRouter.use(passport.authenticate('adminUser', { session: false, failureRedirect: '/failure' }));
 
-overViewRouter.post('/addOverView', overViewController.addOverView);
+overViewRouter.post('/addOverView', upload.single('overViewIcon'), overViewController.addOverView);
 overViewRouter.put('/updateOverView/:id', overViewController.updateOverView);
 overViewRouter.get('/viewOverView/:id', overViewController.viewOverView);
 overViewRouter.get('/allOverViews', overViewController.getAllOverViews);

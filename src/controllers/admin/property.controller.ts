@@ -4,29 +4,66 @@ import validation from '../../middlewares/user.validation';
 import propertyModel from '../../models/admin/properties.model';
 import { makeApiResponce } from '../../libraries/responce';
 import propertyData from '../../libraries/interfaces';
+import { devConfig } from '../../config/config';
 
 export default {
-    async addBedRoomType(req: Request, res: Response, next: NextFunction) {
+    async addProperty(req: any, res: Response, next: NextFunction) {
         try {
-            const { error, value } = validation.validateBedRoomSchema(req.body);
+            const { error, value } = validation.validatePropertySchema(req.body);
             if (error && error.details) {
                 let result = makeApiResponce(error.message, 0, StatusCodes.BAD_REQUEST, {});
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
-            const existingBedRoomType: propertyData = await propertyModel.findOne({ title: req.body.title }).lean();
-            if (existingBedRoomType) {
-                let result = makeApiResponce('This BedRoomType is Already Exsit, Please try another BedRoomType!', 1, StatusCodes.BAD_REQUEST, {});
+            const checkProperty: propertyData = await propertyModel.findOne({ title: req.body.title }).lean();
+            if (checkProperty) {
+                let result = makeApiResponce('This Property is Already Exsit, Please try another property!', 1, StatusCodes.BAD_REQUEST, {});
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
-            const bedRoomType: propertyData = new propertyModel(req.body);
-            bedRoomType.createdBy = req.user;
-            await bedRoomType.save();
-            var bedRoomResponce: any = {
-                _id: bedRoomType._id,
-                title: bedRoomType.title,
-                createdBy: bedRoomType.createdBy
+            const property: propertyData = new propertyModel(req.body);
+            property.createdBy = req.user;
+            if (req.files) {
+                for (var i = 0; i < req.files.length; i++) {
+                    if (req.files[i].fieldname == 'gallaryImages') {
+                        property.gallaryImages = `${devConfig.getImagesPath.gallaryImages}/` + req.files[i].filename;
+                    }
+                    if (req.files[i].fieldname == 'sliderImages') {
+                        property.sliderImages = `${devConfig.getImagesPath.sliderImages}/` + req.files[i].filename;
+                    }
+                    if (req.files[i].fieldname == 'propertyPlan') {
+                        property.propertyPlan = `${devConfig.getImagesPath.propertyPlan}/` + req.files[i].filename;
+                    }
+                }
+            }
+            await property.save();
+            var propertyResponce: any = {
+                _id: property._id,
+                title: property.title,
+                description: property.description,
+                flatNumber: property.flatNumber,
+                street: property.street,
+                city: property.city,
+                state: property.state,
+                country: property.country,
+                countryCode: property.countryCode,
+                sellingPrice: property.sellingPrice,
+                discountPrice: property.discountPrice,
+                deposite: property.deposite,
+                rent: property.rent,
+                additionalInfo: property.additionalInfo,
+                propertyType: property.propertyType,
+                overView: property.overView,
+                amenities: property.amenities,
+                bedRoomTypes: property.bedRoomTypes,
+                furnishingTypes: property.furnishingTypes,
+                tags: property.tags,
+                gallaryImages: property.gallaryImages,
+                sliderImages: property.sliderImages,
+                propertyPlan: property.propertyPlan,
+                agency: property.agency,
+                agent: property.agent,
+                createdBy: property.createdBy
             };
-            let result = makeApiResponce('BedRoomType Added Successfully', 1, StatusCodes.OK, bedRoomResponce);
+            let result = makeApiResponce('New Property Added Successfully', 1, StatusCodes.OK, propertyResponce);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -34,14 +71,23 @@ export default {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
         }
     },
-    async viewBedRoomType(req: Request, res: Response, next: NextFunction) {
+    async viewProperty(req: Request, res: Response, next: NextFunction) {
         try {
-            const bedRoomType: propertyData = await propertyModel.findById(req.params.id).lean();
-            if (!bedRoomType) {
-                let result = makeApiResponce('BedRoomType Not Found', 1, StatusCodes.NOT_FOUND, {});
+            const propertyCheck: propertyData = await propertyModel
+                .findById(req.params.id)
+                .populate('country')
+                .populate('tags')
+                .populate('furnishingTypes')
+                .populate('bedRoomTypes')
+                .populate('amenities')
+                .populate('overView')
+                .populate('additionalInfo')
+                .lean();
+            if (!propertyCheck) {
+                let result = makeApiResponce('Property Not Found', 1, StatusCodes.NOT_FOUND, {});
                 return res.status(StatusCodes.NOT_FOUND).json(result);
             }
-            let result = makeApiResponce('BedRoomType Founds Successfully', 1, StatusCodes.OK, bedRoomType);
+            let result = makeApiResponce('Property Founds Successfully', 1, StatusCodes.OK, propertyCheck);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -49,14 +95,23 @@ export default {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
         }
     },
-    async getAllBedRoomTypes(req: Request, res: Response, next: NextFunction) {
+    async getAllProperties(req: Request, res: Response, next: NextFunction) {
         try {
-            var bedRoomType: propertyData = await propertyModel.find({ delBit: false }).lean();
-            if (!bedRoomType) {
-                let result = makeApiResponce('BedRoomTypes Not Found', 1, StatusCodes.NOT_FOUND, {});
+            var propertyCheck: propertyData = await propertyModel
+                .find({ delBit: false })
+                .populate('country')
+                .populate('tags')
+                .populate('furnishingTypes')
+                .populate('bedRoomTypes')
+                .populate('amenities')
+                .populate('overView')
+                .populate('additionalInfo')
+                .lean();
+            if (!propertyCheck) {
+                let result = makeApiResponce('Property Not Found', 1, StatusCodes.NOT_FOUND, {});
                 return res.status(StatusCodes.NOT_FOUND).json(result);
             }
-            let result = makeApiResponce('BedRoomTypes Found Successfully', 1, StatusCodes.OK, bedRoomType);
+            let result = makeApiResponce('Property Founds Successfully', 1, StatusCodes.OK, propertyCheck);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -64,15 +119,15 @@ export default {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
         }
     },
-    async updateBedRoomType(req: Request, res: Response, next: NextFunction) {
+    async updateProperty(req: Request, res: Response, next: NextFunction) {
         try {
             req.body.updatedBy = req.user;
-            var bedRoomType: propertyData = await propertyModel.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-password').lean();
-            if (!bedRoomType) {
-                let result = makeApiResponce('BedRoomType Not Exists', 1, StatusCodes.BAD_REQUEST, bedRoomType);
+            var propertyCheck: propertyData = await propertyModel.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-password').lean();
+            if (!propertyCheck) {
+                let result = makeApiResponce('Property Not Exists', 1, StatusCodes.BAD_REQUEST, propertyCheck);
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
-            let result = makeApiResponce('BedRoomType Updated Successfully', 1, StatusCodes.OK, bedRoomType);
+            let result = makeApiResponce('Property Updated Successfully', 1, StatusCodes.OK, propertyCheck);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -80,14 +135,14 @@ export default {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
         }
     },
-    async deleteBedRoomType(req: Request, res: Response, next: NextFunction) {
+    async deleteProperty(req: Request, res: Response, next: NextFunction) {
         try {
-            var bedRoomType: propertyData = await propertyModel.findByIdAndUpdate(req.params.id, { delBit: true }, { new: true }).select('-password').lean();
-            if (!bedRoomType) {
-                let result = makeApiResponce('BedRoomType Not Exists', 1, StatusCodes.BAD_REQUEST, bedRoomType);
+            var propertyCheck: propertyData = await propertyModel.findByIdAndUpdate(req.params.id, { delBit: true }, { new: true }).select('-password').lean();
+            if (!propertyCheck) {
+                let result = makeApiResponce('This Property Not Exists', 1, StatusCodes.BAD_REQUEST, propertyCheck);
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
-            let result = makeApiResponce('BedRoomType Deleted Successfully', 1, StatusCodes.OK, bedRoomType);
+            let result = makeApiResponce('Property Deleted Successfully', 1, StatusCodes.OK, propertyCheck);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
