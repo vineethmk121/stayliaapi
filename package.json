@@ -4,7 +4,7 @@
     "description": "",
     "main": "source/server.ts",
     "scripts": {
-        "build": "rm -rf build && prettier --write source/ && tsc",
+        "build": "babel src -d dist --source-maps inline --copy-files",
         "other": "nodemon src/app.ts babel --exec",
         "start": "nodemon src/app.ts babel-node --extensions '.ts,.tsx' --presets env",
         "dev": "nodemon src/app.ts babel-node --extensions '.ts,.tsx' --presets env"
