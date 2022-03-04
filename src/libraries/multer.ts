@@ -21,6 +21,8 @@ var storage = diskStorage({
             upload_dir = `${devConfig.imagesPath.sliderImages}`;
         } else if (file.fieldname == 'propertyPlan') {
             upload_dir = `${devConfig.imagesPath.propertyPlan}`;
+        } else if (file.fieldname == 'profilePic') {
+            upload_dir = `${devConfig.imagesPath.mobileUser}`;
         }
 
         sync(upload_dir); //create directories if not exist

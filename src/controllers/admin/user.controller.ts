@@ -135,7 +135,7 @@ export default {
     async getAllUsers(req: Request, res: Response, next: NextFunction) {
         try {
             // FETCH THE USER
-            var user: IUser = await UserModel.find({ delBit: false }).select('-password').lean();
+            var user: IUser = await UserModel.findOne({ userType: req.body.userType, delBit: false }).select('-password').lean();
             if (!user) {
                 let result = makeApiResponce('Users Not Found', 1, StatusCodes.NOT_FOUND, user);
                 return res.status(StatusCodes.NOT_FOUND).json(result);

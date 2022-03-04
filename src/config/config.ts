@@ -28,7 +28,8 @@ export const devConfig: any = {
         amenitiesIcon: `${ROUTE_IMAGE_PATH}/amenitiesIcon`,
         gallaryImages: `${ROUTE_IMAGE_PATH}/gallaryImages`,
         sliderImages: `${ROUTE_IMAGE_PATH}/sliderImages`,
-        propertyPlan: `${ROUTE_IMAGE_PATH}/propertyPlan`
+        propertyPlan: `${ROUTE_IMAGE_PATH}/propertyPlan`,
+        mobileUser: `${ROUTE_IMAGE_PATH}/profilePic`
     },
     getImagesPath: {
         userProfilePic: `${BASE_IMAGE_URL}/profilePic`,
@@ -37,7 +38,8 @@ export const devConfig: any = {
         amenitiesIcon: `${BASE_IMAGE_URL}/amenitiesIcon`,
         gallaryImages: `${BASE_IMAGE_URL}/gallaryImages`,
         sliderImages: `${BASE_IMAGE_URL}/sliderImages`,
-        propertyPlan: `${BASE_IMAGE_URL}/propertyPlan`
+        propertyPlan: `${BASE_IMAGE_URL}/propertyPlan`,
+        mobileUser: `${BASE_IMAGE_URL}/profilePic`
     },
     email: {
         SERVICE: 'Gmail',

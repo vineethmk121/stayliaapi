@@ -1,27 +1,24 @@
 import mongoose from 'mongoose';
-
+import UserRoles from '../../libraries/interfaces';
 /*********** roles model ************/
 const { Schema } = mongoose;
 const roleSchema = new Schema(
     {
         name: {
             type: String,
-            required: true
+            required: false
         },
         description: {
             type: String,
-            required: true
+            required: false
         },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users',
-            required: true
+            required: false
         },
         rights: [
             {
-                id: {
-                    type: String
-                },
                 icon: {
                     type: String
                 },
@@ -57,4 +54,4 @@ const roleSchema = new Schema(
     },
     { timestamps: true }
 );
-export default mongoose.model('role', roleSchema);
+export default mongoose.model<UserRoles>('role', roleSchema);

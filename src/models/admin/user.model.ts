@@ -112,6 +112,14 @@ const UserSchema = new Schema(
         statusBit: {
             type: Boolean,
             default: false
+        },
+        socialType: {
+            type: String,
+            require: false
+        },
+        socialToken: {
+            type: String,
+            require: false
         }
     },
     { timestamps: true }

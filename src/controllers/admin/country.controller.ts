@@ -19,7 +19,7 @@ export default {
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
             const country: countryData = new countryModel(req.body);
-            country.createdBy = req.user;
+            country.createdBy = req.user; // get current User data
             await country.save();
             var countryResponce: any = {
                 _id: country._id,

@@ -126,7 +126,8 @@ const PropertySchema = new Schema(
             default: null
         },
         agent: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users',
             default: false
         },
         isApproved: {
@@ -142,10 +143,16 @@ const PropertySchema = new Schema(
             ref: 'users',
             default: null
         },
+        propertySaleType: {
+            type: String,
+            enum: ['Buy', 'Rent', 'Personal'],
+            default: 'Personal'
+        },
         delBit: {
             type: Boolean,
             default: false
         },
+
         statusBit: {
             type: Boolean,
             default: false

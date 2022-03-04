@@ -1,6 +1,5 @@
 import express from 'express';
 import { userRouter } from '../routes/admin/user.route';
-import { roleRouter } from '../routes/admin/roles.route';
 import { countryRouter } from '../routes/admin/country.route';
 import { overViewRouter } from '../routes/admin/overView.route';
 import { propertyTypeRouter } from '../routes/admin/propertyType.route';
@@ -10,6 +9,9 @@ import { furnishingTypeRouter } from '../routes/admin/furnishingType.route';
 import { bedRoomTypeRouter } from '../routes/admin/bedRoomType.route';
 import { addInfoRouter } from '../routes/admin/additionalInfo.route';
 import { propertyRouter } from '../routes/admin/property.route';
+import { faqRouter } from '../routes/admin/FAQ.route';
+import { chatRouter } from '../routes/admin/chat.route';
+import { roleRouter } from '../routes/admin/roles.route';
 export const adminRouter = express.Router();
 
 adminRouter.use('/users', userRouter);
@@ -23,3 +25,5 @@ adminRouter.use('/furnish', furnishingTypeRouter);
 adminRouter.use('/bedRoom', bedRoomTypeRouter);
 adminRouter.use('/additionalInfo', addInfoRouter);
 adminRouter.use('/property', propertyRouter);
+adminRouter.use('/faq', faqRouter);
+adminRouter.use('/chat', chatRouter);

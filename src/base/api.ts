@@ -1,5 +1,5 @@
 import express from 'express';
-import { mobileRouter } from '../routes/mobile/user.route';
+import { mobileRouter } from '../routes/mobile/mobile.route';
 export const apiRouter = express.Router();
 
-apiRouter.use('/users', mobileRouter);
+apiRouter.use('/mobile', mobileRouter);

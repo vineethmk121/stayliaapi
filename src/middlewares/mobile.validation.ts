@@ -173,7 +173,8 @@ export default {
             sliderImages: Joi.string().optional(),
             propertyPlan: Joi.string().optional(),
             agency: Joi.any().required(),
-            agent: Joi.string().required()
+            agent: Joi.string().required(),
+            propertySaleType: Joi.string().required()
         });
         const { error, value } = schema.validate(body);
         if (error && error.details) {
@@ -206,6 +207,18 @@ export default {
     validateAgencySchema(body: any) {
         const schema = Joi.object().keys({
             title: Joi.string().required()
+        });
+        const { error, value } = schema.validate(body);
+        if (error && error.details) {
+            return { error };
+        }
+        return { value };
+    },
+    validateSocialSignUpSchema(body: any) {
+        const schema = Joi.object().keys({
+            socialType: Joi.string().required(),
+            socialToken: Joi.string().required(),
+            email: Joi.string().email().optional()
         });
         const { error, value } = schema.validate(body);
         if (error && error.details) {
