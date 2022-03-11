@@ -38,18 +38,18 @@ const PropertySchema = new Schema(
             require: false
         },
         sellingPrice: {
-            type: [Number]
+            type: Number
         },
         discountPrice: {
-            type: [Number],
+            type: Number,
             require: false
         },
         deposite: {
-            type: [Number],
+            type: Number,
             require: false
         },
         rent: {
-            type: [Number]
+            type: Number
         },
         additionalInfo: [
             {
@@ -130,6 +130,31 @@ const PropertySchema = new Schema(
             ref: 'users',
             default: false
         },
+        contructonId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'contructionStatus',
+            default: false
+        },
+        landStatusId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'landStatus',
+            default: false
+        },
+        furnishingStatusId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'furnishingStatus',
+            default: false
+        },
+        priceRangeId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'priceRange',
+            default: false
+        },
+        areaRangeId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'areaRange',
+            default: false
+        },
         isApproved: {
             type: Boolean,
             default: false
@@ -148,6 +173,21 @@ const PropertySchema = new Schema(
             enum: ['Buy', 'Rent', 'Personal'],
             default: 'Personal'
         },
+        address: {
+            type: String,
+            require: false
+        },
+        location: {
+            type: {
+                type: String,
+                default: 'Point',
+                enum: ['Point']
+            },
+            coordinates: {
+                type: [Number],
+                default: [0, 0]
+            }
+        },
         delBit: {
             type: Boolean,
             default: false
@@ -160,6 +200,8 @@ const PropertySchema = new Schema(
     },
     { timestamps: true }
 );
+
+PropertySchema.index({ location: '2dsphere' });
 
 type NewType = propertyData;
 

@@ -56,6 +56,11 @@ export default {
                 bedRoomTypes: property.bedRoomTypes,
                 furnishingTypes: property.furnishingTypes,
                 tags: property.tags,
+                contructonId: property.contructonId,
+                landStatusId: property.landStatusId,
+                furnishingStatusId: property.furnishingStatusId,
+                priceRangeId: property.priceRangeId,
+                areaRangeId: property.areaRangeId,
                 gallaryImages: property.gallaryImages,
                 sliderImages: property.sliderImages,
                 propertyPlan: property.propertyPlan,
@@ -82,6 +87,11 @@ export default {
                 .populate('amenities')
                 .populate('overView')
                 .populate('additionalInfo')
+                .populate('contructonId')
+                .populate('landStatusId')
+                .populate('furnishingStatusId')
+                .populate('areaRangeId')
+                .populate('priceRangeId')
                 .lean();
             if (!propertyCheck) {
                 let result = makeApiResponce('Property Not Found', 1, StatusCodes.NOT_FOUND, {});
@@ -106,6 +116,11 @@ export default {
                 .populate('amenities')
                 .populate('overView')
                 .populate('additionalInfo')
+                .populate('contructonId')
+                .populate('landStatusId')
+                .populate('furnishingStatusId')
+                .populate('areaRangeId')
+                .populate('priceRangeId')
                 .lean();
             if (!propertyCheck) {
                 let result = makeApiResponce('Property Not Found', 1, StatusCodes.NOT_FOUND, {});

@@ -47,7 +47,7 @@ export default {
                     var client = new Twilio(devConfig.accountSid, devConfig.authToken);
                     client.messages.create({
                         from: devConfig.twilioNumber,
-                        to: devConfig.myNumber,
+                        to: req.body.mobile,
                         body: `You just received an otp on your cell number!${randomOtp}`
                     });
                     let result = makeApiResponce('OTP Send To User', 1, StatusCodes.OK, {});
@@ -461,54 +461,87 @@ export default {
     },
     async filterProperties(req: Request, res: Response, next: NextFunction) {
         try {
-            let agent = await userModel.find({ userType: 'agent' }).lean();
-            var agentIds;
-            for (let i = 0; i < agent.length; i++) {
-                agentIds = agent[i]._id;
+            let desireAgent = req.body.agentId;
+            let findAgent = await userModel.find({ _id: desireAgent }).lean();
+            if (!findAgent) {
+                let result = makeApiResponce('No Properties Exists Againt This Agent ID!', 0, StatusCodes.NOT_FOUND, findAgent);
+                return res.status(StatusCodes.NOT_FOUND).json(result);
             }
             let amenities = await amenitiesModel.find({ _id: req.body.amenityId, delBit: false }).lean();
             var amenityIds;
             for (let i = 0; i < amenities.length; i++) {
                 amenityIds = amenities[i]._id;
             }
+            if (!amenities) {
+                let result = makeApiResponce('No Properties Exists Againt This Amenities ID!', 0, StatusCodes.NOT_FOUND, amenities);
+                return res.status(StatusCodes.NOT_FOUND).json(result);
+            }
             let country = await countryModel.find({ _id: req.body.countryId, delBit: false }).lean();
             var countryIds;
             for (let i = 0; i < country.length; i++) {
                 countryIds = country[i]._id;
+            }
+            if (!country) {
+                let result = makeApiResponce('No Properties Exists Againt This Country ID!', 0, StatusCodes.NOT_FOUND, country);
+                return res.status(StatusCodes.NOT_FOUND).json(result);
             }
             let additionalInfo = await additionalInfoModel.find({ _id: req.body.additionalInfoId, delBit: false }).lean();
             var additionalInfoIds;
             for (let i = 0; i < additionalInfo.length; i++) {
                 additionalInfoIds = additionalInfo[i]._id;
             }
+            if (!additionalInfo) {
+                let result = makeApiResponce('No Properties Exists Againt This AdditionalInfo ID!', 0, StatusCodes.NOT_FOUND, additionalInfo);
+                return res.status(StatusCodes.NOT_FOUND).json(result);
+            }
             let overView = await overViewsModel.find({ _id: req.body.overViewId, delBit: false }).lean();
             var overViewIds;
             for (let i = 0; i < overView.length; i++) {
                 overViewIds = overView[i]._id;
+            }
+            if (!overView) {
+                let result = makeApiResponce('No Properties Exists Againt This OverView ID!', 0, StatusCodes.NOT_FOUND, overView);
+                return res.status(StatusCodes.NOT_FOUND).json(result);
             }
             let bedRoomType = await bedRoomTypeModel.find({ _id: req.body.bedRoomTypeId, delBit: false }).lean();
             var bedRoomTypeIds;
             for (let i = 0; i < bedRoomType.length; i++) {
                 bedRoomTypeIds = bedRoomType[i]._id;
             }
+            if (!bedRoomType) {
+                let result = makeApiResponce('No Properties Exists Againt This BedRoomType ID!', 0, StatusCodes.NOT_FOUND, bedRoomType);
+                return res.status(StatusCodes.NOT_FOUND).json(result);
+            }
             let furnishType = await furnishingTypeModel.find({ _id: req.body.furnishingTypeId, delBit: false }).lean();
             var furnishTypeIds;
             for (let i = 0; i < furnishType.length; i++) {
                 furnishTypeIds = furnishType[i]._id;
+            }
+            if (!furnishType) {
+                let result = makeApiResponce('No Properties Exists Againt This FurnishType ID!', 0, StatusCodes.NOT_FOUND, furnishType);
+                return res.status(StatusCodes.NOT_FOUND).json(result);
             }
             let tag = await tagsModel.find({ _id: req.body.tagId, delBit: false }).lean();
             var tagIds;
             for (let i = 0; i < tag.length; i++) {
                 tagIds = tag[i]._id;
             }
+            if (!tag) {
+                let result = makeApiResponce('No Properties Exists Againt This Tag ID!', 0, StatusCodes.NOT_FOUND, tag);
+                return res.status(StatusCodes.NOT_FOUND).json(result);
+            }
             let agency = await agencyModel.find({ _id: req.body.agencyId, delBit: false }).lean();
             var agencyIds;
             for (let i = 0; i < agency.length; i++) {
                 agencyIds = agency[i]._id;
             }
+            if (!agency) {
+                let result = makeApiResponce('No Properties Exists Againt This Agency ID!', 0, StatusCodes.NOT_FOUND, agency);
+                return res.status(StatusCodes.NOT_FOUND).json(result);
+            }
             let query = {
                 $or: [
-                    { agent: agentIds },
+                    { agent: findAgent },
                     { amenities: amenityIds },
                     { country: countryIds },
                     { additionalInfo: additionalInfoIds },
@@ -629,6 +662,108 @@ export default {
                 return res.status(StatusCodes.NOT_FOUND).json(result);
             }
             let result = makeApiResponce('List of properties Against AgentID Found Successfully!', 1, StatusCodes.OK, checklistOfPropertiesAgaintAgent);
+            return res.status(StatusCodes.OK).json(result);
+        } catch (err) {
+            console.log(err);
+            let result = makeApiResponce('INTERNAL_SERVER_ERROR', 0, StatusCodes.INTERNAL_SERVER_ERROR, {});
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
+        }
+    },
+    async nearByProperties(req: Request, res: Response, next: NextFunction) {
+        try {
+            var loc = [32.0953, 74.1856];
+
+            var locationquery = {
+                location: {
+                    $near: {
+                        $geometry: {
+                            type: 'Point',
+                            coordinates: loc
+                        },
+                        $maxDistance: 50
+                    }
+                }
+            };
+            let nearByProperty: mobilePropertyData = await propertiesModel
+                .find(locationquery)
+                .populate('agent')
+                .populate('amenities')
+                .populate('country')
+                .populate('additionalInfo')
+                .populate('overView')
+                .populate('bedRoomTypes')
+                .populate('furnishingTypes')
+                .populate('tags')
+                .lean();
+            if (!nearByProperty) {
+                let result = makeApiResponce('properties Against AgentID not Found', 0, StatusCodes.NOT_FOUND, nearByProperty);
+                return res.status(StatusCodes.NOT_FOUND).json(result);
+            }
+            let result = makeApiResponce('List of properties Against AgentID Found Successfully!', 1, StatusCodes.OK, nearByProperty);
+            return res.status(StatusCodes.OK).json(result);
+        } catch (err) {
+            console.log(err);
+            let result = makeApiResponce('INTERNAL_SERVER_ERROR', 0, StatusCodes.INTERNAL_SERVER_ERROR, {});
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
+        }
+    },
+    async filterPropertiesBilal(req: Request, res: Response, next: NextFunction) {
+        try {
+            let title = req.body.title;
+            let flatNumber = req.body.flatNumber;
+            let country = req.body.country;
+            let rent = req.body.rent;
+            let additionalInfo = req.body.additionalInfo;
+            let propertyType = req.body.propertyType;
+            let overView = req.body.overView;
+            let amenities = req.body.amenities;
+            let bedRoomTypes = req.body.bedRoomTypes;
+            let furnishingTypes = req.body.furnishingTypes;
+            let tags = req.body.tags;
+            let propertyPlan = req.body.propertyPlan;
+            let agency = req.body.agency;
+            let agent = req.body.agent;
+            let contructonId = req.body.contructonId;
+            let landStatusId = req.body.landStatusId;
+            let furnishingStatusId = req.body.furnishingStatusId;
+            let priceRangeId = req.body.priceRangeId;
+            let areaRangeId = req.body.areaRangeId;
+            let propertySaleType = req.body.propertySaleType;
+
+            let query = {};
+            query = { furnishingStatusId: furnishingStatusId };
+            console.log(query);
+            return false;
+            // let query = {
+            //     $or: [
+            //         { agent: findAgent },
+            //         { amenities: amenityIds },
+            //         { country: countryIds },
+            //         { additionalInfo: additionalInfoIds },
+            //         { overView: overViewIds },
+            //         { bedRoomTypes: bedRoomTypeIds },
+            //         { furnishTypes: furnishTypeIds },
+            //         { tags: tagIds },
+            //         { agency: agencyIds }
+            //     ]
+            // };
+            let getProperties = await propertiesModel
+                .find(query)
+                .populate('propertyId')
+                .populate('agent')
+                .populate('amenities')
+                .populate('country')
+                .populate('additionalInfo')
+                .populate('overView')
+                .populate('bedRoomTypes')
+                .populate('furnishingTypes')
+                .populate('tags')
+                .lean();
+            if (!getProperties) {
+                let result = makeApiResponce('Properties Not Found', 0, StatusCodes.NOT_FOUND, getProperties);
+                return res.status(StatusCodes.NOT_FOUND).json(result);
+            }
+            let result = makeApiResponce('List of Properties Successfully!', 1, StatusCodes.OK, getProperties);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);

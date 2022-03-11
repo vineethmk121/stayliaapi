@@ -32,6 +32,7 @@
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "express-session": "^1.17.2",
+        "fcm-node": "^1.6.1",
         "html-to-text": "^8.1.0",
         "install": "^0.13.0",
         "jsonwebtoken": "^8.5.1",

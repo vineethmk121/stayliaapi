@@ -174,7 +174,9 @@ export default {
             propertyPlan: Joi.string().optional(),
             agency: Joi.any().required(),
             agent: Joi.string().required(),
-            propertySaleType: Joi.string().required()
+            propertySaleType: Joi.string().required(),
+            address: Joi.string().required(),
+            location: Joi.string().optional()
         });
         const { error, value } = schema.validate(body);
         if (error && error.details) {

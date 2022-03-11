@@ -169,11 +169,18 @@ export default {
             bedRoomTypes: Joi.any().required(),
             furnishingTypes: Joi.any().required(),
             tags: Joi.any().required(),
+            contructonId: Joi.any().required(),
+            landStatusId: Joi.any().required(),
+            furnishingStatusId: Joi.any().required(),
+            priceRangeId: Joi.any().required(),
+            areaRangeId: Joi.any().required(),
             gallaryImages: Joi.string().optional(),
             sliderImages: Joi.string().optional(),
             propertyPlan: Joi.string().optional(),
             agency: Joi.any().required(),
-            agent: Joi.string().required()
+            agent: Joi.string().required(),
+            address: Joi.string().required(),
+            location: Joi.string().optional()
         });
         const { error, value } = schema.validate(body);
         if (error && error.details) {
@@ -204,6 +211,58 @@ export default {
         return { value };
     },
     validateAgencySchema(body: any) {
+        const schema = Joi.object().keys({
+            title: Joi.string().required()
+        });
+        const { error, value } = schema.validate(body);
+        if (error && error.details) {
+            return { error };
+        }
+        return { value };
+    },
+    validatepriceRangeSchema(body: any) {
+        const schema = Joi.object().keys({
+            minPriceRange: Joi.number().required(),
+            maxPriceRange: Joi.number().required()
+        });
+        const { error, value } = schema.validate(body);
+        if (error && error.details) {
+            return { error };
+        }
+        return { value };
+    },
+    validateAreaRangeSchema(body: any) {
+        const schema = Joi.object().keys({
+            minAreaRange: Joi.number().required(),
+            maxAreaRange: Joi.number().required()
+        });
+        const { error, value } = schema.validate(body);
+        if (error && error.details) {
+            return { error };
+        }
+        return { value };
+    },
+    validateFurnishingStatusSchema(body: any) {
+        const schema = Joi.object().keys({
+            title: Joi.string().required()
+        });
+        const { error, value } = schema.validate(body);
+        if (error && error.details) {
+            return { error };
+        }
+        return { value };
+    },
+    validateLandStatusSchema(body: any) {
+        const schema = Joi.object().keys({
+            title: Joi.string().required()
+        });
+        const { error, value } = schema.validate(body);
+        if (error && error.details) {
+            return { error };
+        }
+        return { value };
+    },
+    validateContructionStatusSchema(body: any) {
         const schema = Joi.object().keys({
             title: Joi.string().required()
         });

@@ -3,7 +3,7 @@ import tagsController from '../../controllers/admin/tags.contoller';
 import passport from 'passport';
 
 export const tagsRouter: express.Router = express.Router();
-//tagsRouter.use(passport.authenticate('adminUser', { session: false, failureRedirect: '/failure' }));
+tagsRouter.use(passport.authenticate('adminUser', { session: false, failureRedirect: '/failure' }));
 
 tagsRouter.post('/addTag', tagsController.addTag);
 tagsRouter.put('/updateTag/:id', tagsController.updateTag);

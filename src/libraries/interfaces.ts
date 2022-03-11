@@ -48,10 +48,10 @@ export default interface propertyData extends Document {
     state: String;
     country: any;
     countryCode: String;
-    sellingPrice: [Number];
-    discountPrice: [Number];
-    deposite: [Number];
-    rent: [Number];
+    sellingPrice: Number;
+    discountPrice: Number;
+    deposite: Number;
+    rent: Number;
     additionalInfo: any;
     propertyType: String;
     overView: [any];
@@ -59,6 +59,11 @@ export default interface propertyData extends Document {
     bedRoomTypes: [any];
     furnishingTypes: [any];
     tags: [any];
+    contructonId: any;
+    landStatusId: any;
+    areaRangeId: any;
+    furnishingStatusId: any;
+    priceRangeId: any;
     gallaryImages: String;
     sliderImages: String;
     propertyPlan: String;
@@ -67,6 +72,18 @@ export default interface propertyData extends Document {
     isApproved: Boolean;
     createdBy: any;
     updatedBy: any;
+    address: String;
+    location: {
+        type: {
+            type: String;
+            default: 'Point';
+            enum: ['Point'];
+        };
+        coordinates: {
+            type: [Number];
+            default: [0, 0];
+        };
+    };
 }
 export default interface mobilePropertyData extends Document {
     title: String;
@@ -77,10 +94,10 @@ export default interface mobilePropertyData extends Document {
     state: String;
     country: any;
     countryCode: String;
-    sellingPrice: [Number];
-    discountPrice: [Number];
-    deposite: [Number];
-    rent: [Number];
+    sellingPrice: Number;
+    discountPrice: Number;
+    deposite: Number;
+    rent: Number;
     additionalInfo: any;
     propertyType: String;
     overView: [any];
@@ -88,6 +105,11 @@ export default interface mobilePropertyData extends Document {
     bedRoomTypes: [any];
     furnishingTypes: [any];
     tags: [any];
+    contructonId: any;
+    landStatusId: any;
+    areaRangeId: any;
+    furnishingStatusId: any;
+    priceRangeId: any;
     gallaryImages: String;
     sliderImages: String;
     propertyPlan: String;
@@ -96,6 +118,20 @@ export default interface mobilePropertyData extends Document {
     isApproved: Boolean;
     createdBy: any;
     updatedBy: any;
+    address: String;
+    lat: String;
+    long: String;
+    location: {
+        type: {
+            type: String;
+            default: 'Point';
+            enum: ['Point'];
+        };
+        coordinates: {
+            type: [Number];
+            default: [0, 0];
+        };
+    };
 }
 export default interface countryData extends Document {
     countryName: String;
@@ -155,4 +191,21 @@ export default interface savePropertyData extends Document {
 export default interface saveAgentData extends Document {
     userId: any;
     AgentId: any;
+}
+export default interface priceRangeData extends Document {
+    minPriceRange: Number;
+    maxPriceRange: Number;
+}
+export default interface areaRangeData extends Document {
+    minAreaRange: Number;
+    maxAreaRange: Number;
+}
+export default interface furnishingStatusData extends Document {
+    title: String;
+}
+export default interface landStatusData extends Document {
+    title: String;
+}
+export default interface constructionStatusData extends Document {
+    title: String;
 }
