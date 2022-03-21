@@ -24,6 +24,11 @@ import bedRoomTypeModel from '../../models/admin/bedRoomType.model';
 import furnishingTypeModel from '../../models/admin/furnishingType.model';
 import tagsModel from '../../models/admin/tags.model';
 import agencyModel from '../../models/admin/agency.model';
+import contructionStatusModel from '../../models/admin/contruction.model';
+import priceRangeModel from '../../models/admin/priceRange.model';
+import landStatusModel from '../../models/admin/lanStatus.model';
+import furnishingStatusModel from '../../models/admin/furnishingStatus.model';
+import areaRangeModel from '../../models/admin/areaRange.model';
 
 export default {
     /************** MOBILE AUTH *************/
@@ -671,7 +676,8 @@ export default {
     },
     async nearByProperties(req: Request, res: Response, next: NextFunction) {
         try {
-            var loc = [32.0953, 74.1856];
+            // var loc = [32.0953, 74.1856];
+            let loc = req.body.loc;
 
             var locationquery = {
                 location: {
@@ -680,7 +686,7 @@ export default {
                             type: 'Point',
                             coordinates: loc
                         },
-                        $maxDistance: 50
+                        $maxDistance: 50 * 1000
                     }
                 }
             };
@@ -709,47 +715,77 @@ export default {
     },
     async filterPropertiesBilal(req: Request, res: Response, next: NextFunction) {
         try {
-            let title = req.body.title;
-            let flatNumber = req.body.flatNumber;
-            let country = req.body.country;
-            let rent = req.body.rent;
-            let additionalInfo = req.body.additionalInfo;
-            let propertyType = req.body.propertyType;
-            let overView = req.body.overView;
-            let amenities = req.body.amenities;
-            let bedRoomTypes = req.body.bedRoomTypes;
-            let furnishingTypes = req.body.furnishingTypes;
-            let tags = req.body.tags;
-            let propertyPlan = req.body.propertyPlan;
-            let agency = req.body.agency;
-            let agent = req.body.agent;
-            let contructonId = req.body.contructonId;
-            let landStatusId = req.body.landStatusId;
-            let furnishingStatusId = req.body.furnishingStatusId;
-            let priceRangeId = req.body.priceRangeId;
-            let areaRangeId = req.body.areaRangeId;
-            let propertySaleType = req.body.propertySaleType;
+            let propertyTypeFilter;
+            let bedRoomsFilter;
+            let furnishingStatusFilter;
+            let landStatusFilter;
+            let constructionStatusFilter;
+            let sellingPriceFilter;
+            let postedByFilter;
+            let areaFilter;
+            let amenitiesFilter;
+            let { propertyType, minPrice, maxPrice, minArea, maxArea, amenities, bedRooms, furnishingStatus, landStatus, constructionStatus, postedBy } = req.body;
 
-            let query = {};
-            query = { furnishingStatusId: furnishingStatusId };
-            console.log(query);
-            return false;
-            // let query = {
-            //     $or: [
-            //         { agent: findAgent },
-            //         { amenities: amenityIds },
-            //         { country: countryIds },
-            //         { additionalInfo: additionalInfoIds },
-            //         { overView: overViewIds },
-            //         { bedRoomTypes: bedRoomTypeIds },
-            //         { furnishTypes: furnishTypeIds },
-            //         { tags: tagIds },
-            //         { agency: agencyIds }
-            //     ]
-            // };
+            if (propertyType) {
+                // propertyTypeFilter = { propertyType: propertyType };
+                propertyTypeFilter = { propertyType: { $in: propertyType } };
+            } else {
+                propertyTypeFilter = {};
+            }
+
+            if (bedRooms) {
+                bedRoomsFilter = { bedRooms: bedRooms };
+            } else {
+                bedRoomsFilter = {};
+            }
+
+            if (postedBy) {
+                postedByFilter = { postedBy: postedBy };
+            } else {
+                postedByFilter = {};
+            }
+
+            if (furnishingStatus) {
+                furnishingStatusFilter = { furnishingStatusId: furnishingStatus };
+            } else {
+                furnishingStatusFilter = {};
+            }
+            if (landStatus) {
+                landStatusFilter = { landStatusId: landStatus };
+            } else {
+                landStatusFilter = {};
+            }
+            if (constructionStatus) {
+                constructionStatusFilter = { contructonId: constructionStatus };
+            } else {
+                constructionStatusFilter = {};
+            }
+
+            if (minPrice && maxPrice) {
+                sellingPriceFilter = { sellingPrice: { $gte: minPrice, $lte: maxPrice } };
+            } else {
+                sellingPriceFilter = {};
+            }
+
+            if (minArea && maxArea) {
+                areaFilter = { propertyArea: { $gte: minArea, $lte: maxArea } };
+            } else {
+                areaFilter = {};
+            }
+
+            if (amenities) {
+                amenitiesFilter = { amenities: { $in: amenities } };
+            } else {
+                amenitiesFilter = {};
+            }
+
+            let query = {
+                $and: [propertyTypeFilter, bedRoomsFilter, furnishingStatusFilter, landStatusFilter, constructionStatusFilter, sellingPriceFilter, postedByFilter, areaFilter, amenitiesFilter]
+            };
+
             let getProperties = await propertiesModel
                 .find(query)
-                .populate('propertyId')
+                // .populate('propertyId')
                 .populate('agent')
                 .populate('amenities')
                 .populate('country')
@@ -764,6 +800,36 @@ export default {
                 return res.status(StatusCodes.NOT_FOUND).json(result);
             }
             let result = makeApiResponce('List of Properties Successfully!', 1, StatusCodes.OK, getProperties);
+            return res.status(StatusCodes.OK).json(result);
+        } catch (err) {
+            console.log(err);
+            let result = makeApiResponce('INTERNAL_SERVER_ERROR', 0, StatusCodes.INTERNAL_SERVER_ERROR, {});
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
+        }
+    },
+    async listofPropertyFilter(req: Request, res: Response, next: NextFunction) {
+        try {
+            let furnish = await furnishingStatusModel.find({ delBit: false }).lean();
+
+            let contruction = await contructionStatusModel.find({ delBit: false }).lean();
+
+            let land = await landStatusModel.find({ delBit: false }).lean();
+
+            let priceRange = await priceRangeModel.find({ delBit: false }).lean();
+
+            let areaRange = await areaRangeModel.find({ delBit: false }).lean();
+
+            let amenity = await amenitiesModel.find({ delBit: false }).lean();
+
+            let filterArray = {
+                furnish: furnish,
+                contruction: contruction,
+                land: land,
+                priceRange: priceRange,
+                areaRange: areaRange,
+                amenity: amenity
+            };
+            let result = makeApiResponce('Agent has been saved!', 1, StatusCodes.OK, filterArray);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);

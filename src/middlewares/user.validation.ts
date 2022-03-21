@@ -18,7 +18,8 @@ export default {
             gender: Joi.string().required(),
             parentAgency: Joi.string().required(),
             country: Joi.string().required(),
-            updatedBy: Joi.string().optional()
+            updatedBy: Joi.string().optional(),
+            roleId: Joi.string().required()
         });
         const { error, value } = schema.validate(body);
         if (error && error.details) {

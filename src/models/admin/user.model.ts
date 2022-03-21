@@ -120,6 +120,11 @@ const UserSchema = new Schema(
         socialToken: {
             type: String,
             require: false
+        },
+        roleId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'role',
+            require: false
         }
     },
     { timestamps: true }

@@ -87,6 +87,7 @@ export default {
                 building: user.building,
                 state: user.state,
                 locality: user.locality,
+                roleId: user.roleId,
                 country: user.country,
                 createdBy: user.createdBy
             };

@@ -4,7 +4,7 @@ import passport from 'passport';
 
 export const roleRouter: express.Router = express.Router();
 
-roleRouter.use(passport.authenticate('adminUser', { session: false, failureRedirect: '/failure' }));
+// roleRouter.use(passport.authenticate('adminUser', { session: false, failureRedirect: '/failure' }));
 
 roleRouter.post('/addRole', rolesController.addRole);
 roleRouter.post('/updateRole/:id', rolesController.updateRole);

@@ -22,6 +22,7 @@ export default interface IUser extends Document {
     emailVerified: String;
     socialType: String;
     socialToken: String;
+    roleId: String;
 }
 export default interface UserRights extends Document {
     id: String;
