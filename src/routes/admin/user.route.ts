@@ -2,6 +2,7 @@ import express from 'express';
 import userController from '../../controllers/admin/user.controller';
 import passport from 'passport';
 import upload from '../../libraries/multer';
+const isLoggedIn = require('../../middlewares/user-roles-middleware.ts');
 
 export const userRouter: express.Router = express.Router();
 
@@ -15,5 +16,5 @@ userRouter.post('/changePassword', userController.changePassword);
 userRouter.post('/addUser', upload.single('profilePic'), userController.addUser);
 userRouter.put('/updateUser/:id', upload.single('profilePic'), userController.updateUser);
 userRouter.get('/viewUser/:id', userController.viewUser);
-userRouter.get('/allUsers', userController.getAllUsers);
+userRouter.get('/allUsers', isLoggedIn, userController.getAllUsers);
 userRouter.delete('/deleteUser/:id', userController.deleteUser);

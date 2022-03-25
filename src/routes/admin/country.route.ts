@@ -7,7 +7,7 @@ export const countryRouter: express.Router = express.Router();
 countryRouter.use(passport.authenticate('adminUser', { session: false, failureRedirect: '/failure' }));
 
 countryRouter.post('/addCountry', isLoggedIn, countryController.addCountry);
-countryRouter.put('/updateCountry/:id', countryController.updateCountry);
+countryRouter.put('/updateCountry/:id', isLoggedIn, countryController.updateCountry);
 countryRouter.get('/viewCountry/:id', isLoggedIn, countryController.viewCountry);
 countryRouter.get('/allCountry', isLoggedIn, countryController.getAllCountries);
-countryRouter.delete('/deleteCountry/:id', countryController.deleteCountry);
+countryRouter.delete('/deleteCountry/:id', isLoggedIn, countryController.deleteCountry);
