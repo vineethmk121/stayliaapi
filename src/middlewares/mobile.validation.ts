@@ -39,8 +39,8 @@ export default {
     },
     validateMobileSignUpSchema(body: any) {
         const schema = Joi.object().keys({
-            email: Joi.string().email().required(),
-            fullName: Joi.string().required(),
+            // email: Joi.string().email().required(),
+            // fullName: Joi.string().required(),
             mobile: Joi.string().required(),
             otp: Joi.string().optional()
         });

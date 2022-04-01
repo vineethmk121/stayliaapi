@@ -13,8 +13,8 @@ userRouter.get('/verifyEmail', userController.verifyEmail);
 
 userRouter.use(passport.authenticate('adminUser', { session: false, failureRedirect: '/failure' }));
 userRouter.post('/changePassword', userController.changePassword);
-userRouter.post('/addUser', upload.single('profilePic'), userController.addUser);
-userRouter.put('/updateUser/:id', upload.single('profilePic'), userController.updateUser);
-userRouter.get('/viewUser/:id', userController.viewUser);
+userRouter.post('/addUser', isLoggedIn, upload.single('profilePic'), userController.addUser);
+userRouter.put('/updateUser/:id', isLoggedIn, upload.single('profilePic'), userController.updateUser);
+userRouter.get('/viewUser/:id', isLoggedIn, userController.viewUser);
 userRouter.get('/allUsers', isLoggedIn, userController.getAllUsers);
-userRouter.delete('/deleteUser/:id', userController.deleteUser);
+userRouter.delete('/deleteUser/:id', isLoggedIn, userController.deleteUser);

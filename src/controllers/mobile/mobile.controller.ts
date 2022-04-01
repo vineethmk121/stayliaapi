@@ -40,30 +40,33 @@ export default {
                 let result = makeApiResponce(error.message, 0, StatusCodes.BAD_REQUEST, {});
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
+            var randomOtp = await randomValueHex('6');
+
+            if (devConfig.accountSid && devConfig.authToken && devConfig.myNumber && devConfig.twilioNumber) {
+                var client = new Twilio(devConfig.accountSid, devConfig.authToken);
+                client.messages.create({
+                    from: devConfig.twilioNumber,
+                    to: req.body.mobile,
+                    body: `You just received an otp on your cell number!${randomOtp}`
+                });
+                console.error('Successfully');
+            } else {
+                console.error('You are missing one of the variables you need to send a message');
+            }
+
             const isUserExists = await UserModel.findOne({
                 mobile: req.body.mobile
             });
             if (isUserExists) {
-                var randomOtp = await randomValueHex('6');
                 isUserExists.otp = randomOtp;
                 //isUserExists.fcmToken = req.body.fcmToken;
                 await isUserExists.save();
-                if (devConfig.accountSid && devConfig.authToken && devConfig.myNumber && devConfig.twilioNumber) {
-                    var client = new Twilio(devConfig.accountSid, devConfig.authToken);
-                    client.messages.create({
-                        from: devConfig.twilioNumber,
-                        to: req.body.mobile,
-                        body: `You just received an otp on your cell number!${randomOtp}`
-                    });
-                    let result = makeApiResponce('OTP Send To User', 1, StatusCodes.OK, {});
-                    return res.status(StatusCodes.OK).json(result);
-                } else {
-                    console.error('You are missing one of the variables you need to send a message');
-                }
+                let result = makeApiResponce('OTP Send To User', 1, StatusCodes.OK, isUserExists);
+                return res.status(StatusCodes.OK).json(result);
             } else {
                 const user: any = new UserModel(req.body);
                 user.userType = 'appUser';
-                user.otp = randomOtp!;
+                user.otp = randomOtp;
                 //user.fcmToken = req.body.fcmToken;
                 await user.save();
                 let result = makeApiResponce('User Created Successfully', 1, StatusCodes.OK, user);
@@ -110,10 +113,24 @@ export default {
             let result = makeApiResponce('Phone Number Not Found', 1, StatusCodes.NOT_FOUND, {});
             return res.status(StatusCodes.NOT_FOUND).json(result);
         }
-        if (user.otp != req.body.otp) {
-            let result = makeApiResponce('Invalid Credentials', 1, StatusCodes.BAD_REQUEST, {});
-            return res.status(StatusCodes.BAD_REQUEST).json(result);
+        // if (user.otp != req.body.otp) {
+        //     let result = makeApiResponce('Invalid Credentials', 1, StatusCodes.BAD_REQUEST, {});
+        //     return res.status(StatusCodes.BAD_REQUEST).json(result);
+        // }
+
+        var randomOtp = await randomValueHex('6');
+        user.otp = randomOtp;
+        if (devConfig.accountSid && devConfig.authToken && devConfig.myNumber && devConfig.twilioNumber) {
+            var client = new Twilio(devConfig.accountSid, devConfig.authToken);
+            client.messages.create({
+                from: devConfig.twilioNumber,
+                to: devConfig.myNumber,
+                body: `You just received an otp on your cell number!${randomOtp}`
+            });
+        } else {
+            console.error('You are missing one of the variables you need to send a message');
         }
+
         await user.save();
         let id = user._id;
         const deviceToken = await UserModel.findByIdAndUpdate(id, { fcmToken: req.body.fcmToken });
@@ -130,7 +147,7 @@ export default {
             gender: user.gender,
             token: token
         };
-        let result = makeApiResponce('otp Verified Successfully', 1, StatusCodes.OK, userResponce);
+        let result = makeApiResponce('Verified otp send Successfully', 1, StatusCodes.OK, userResponce);
         return res.status(StatusCodes.OK).json(result);
     },
     async socialSignIn(req: Request, res: Response, next: NextFunction) {

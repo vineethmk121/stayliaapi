@@ -272,5 +272,17 @@ export default {
             return { error };
         }
         return { value };
+    },
+    validateNationalitiesSchema(body: any) {
+        const schema = Joi.object().keys({
+            title: Joi.string().required(),
+            state: Joi.string().required(),
+            updatedBy: Joi.string().optional()
+        });
+        const { error, value } = schema.validate(body);
+        if (error && error.details) {
+            return { error };
+        }
+        return { value };
     }
 };

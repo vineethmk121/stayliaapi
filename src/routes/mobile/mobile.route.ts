@@ -10,7 +10,7 @@ mobileRouter.post('/socialSignIn', mobileController.socialSignIn);
 mobileRouter.post('/verifyOtp', mobileController.verifyOtp);
 mobileRouter.post('/resentOtp', mobileController.resentOtp);
 //AUTHORIZATON
-// mobileRouter.use(passport.authenticate('mobileUser', { session: false, failureRedirect: '/failure' }));
+mobileRouter.use(passport.authenticate('mobileUser', { session: false, failureRedirect: '/failure' }));
 /********** MOBILE API'S WITH AUTHENTICATION  **********/
 mobileRouter.get('/viewProfile/:id', mobileController.viewProfile);
 mobileRouter.put('/updateProfile/:id', upload.single('profilePic'), mobileController.updateProfile);

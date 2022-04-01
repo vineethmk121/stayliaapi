@@ -65,7 +65,7 @@ export default {
     },
     async getAllRoles(req: Request, res: Response, next: NextFunction) {
         try {
-            let roles: any = await rolesModel.find({ createdBy: req.user, delBit: false }).sort({ createdAt: -1 }).populate('createdBy', ['-password']).lean();
+            let roles: any = await rolesModel.find({ delBit: false }).sort({ createdAt: -1 }).populate('createdBy', ['-password']).lean();
             if (!roles.length) {
                 let result = makeApiResponce('Roles Not Found!', 0, StatusCodes.NOT_FOUND, roles);
                 return res.status(StatusCodes.NOT_FOUND).json(result);

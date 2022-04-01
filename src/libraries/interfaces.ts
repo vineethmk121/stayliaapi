@@ -210,3 +210,6 @@ export default interface landStatusData extends Document {
 export default interface constructionStatusData extends Document {
     title: String;
 }
+export default interface nationalitiesData extends Document {
+    title: String;
+}

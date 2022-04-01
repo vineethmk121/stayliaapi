@@ -7,15 +7,15 @@ export const sendEmail = (options: any) =>
         const transpoter = nodemailer.createTransport({
             service: devConfig.email.SERVICE,
             auth: {
-                user: devConfig.email.USER,
-                pass: devConfig.email.PASSOWRD
+                user: 'qa.appcrates@gmail.com',
+                pass: 'Appcrates123'
             }
         });
         const text = htmlToText.fromString(options.html, {
             wordwrap: 130
         });
         const mailOptions = {
-            from: devConfig.email.FROM,
+            from: 'qa.appcrates@gmail.com',
             to: options.email,
             subject: options.subject,
             text,
