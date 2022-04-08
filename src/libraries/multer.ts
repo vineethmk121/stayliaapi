@@ -14,7 +14,7 @@ var storage = diskStorage({
         } else if (file.fieldname == 'overViewIcon') {
             upload_dir = `${devConfig.imagesPath.overViewIcon}`;
         } else if (file.fieldname == 'amenitiesIcon') {
-            upload_dir = `${devConfig.imagesPath.specialtyIcon}`;
+            upload_dir = `${devConfig.imagesPath.amenitiesIcon}`;
         } else if (file.fieldname == 'gallaryImages') {
             upload_dir = `${devConfig.imagesPath.gallaryImages}`;
         } else if (file.fieldname == 'sliderImages') {
@@ -25,6 +25,7 @@ var storage = diskStorage({
             upload_dir = `${devConfig.imagesPath.mobileUser}`;
         }
 
+        console.log(upload_dir);
         sync(upload_dir); //create directories if not exist
         cb(null, upload_dir);
     },

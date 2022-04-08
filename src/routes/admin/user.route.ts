@@ -18,3 +18,5 @@ userRouter.put('/updateUser/:id', isLoggedIn, upload.single('profilePic'), userC
 userRouter.get('/viewUser/:id', isLoggedIn, userController.viewUser);
 userRouter.get('/allUsers', isLoggedIn, userController.getAllUsers);
 userRouter.delete('/deleteUser/:id', isLoggedIn, userController.deleteUser);
+userRouter.get('/listofAgents', userController.listofAgents);
+userRouter.get('/listofAgency', userController.listofAgency);

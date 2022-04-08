@@ -32,3 +32,6 @@ mobileRouter.post('/filterProperties', mobileController.filterProperties);
 mobileRouter.post('/nearByProperties', mobileController.nearByProperties);
 mobileRouter.post('/filterPropertiesBilal', mobileController.filterPropertiesBilal);
 mobileRouter.get('/listofPropertyFilter', mobileController.listofPropertyFilter);
+mobileRouter.get('/newlyAddedProperties', mobileController.newlyAddedProperties);
+mobileRouter.get('/listofAgents', mobileController.listofAgents);
+mobileRouter.get('/listofAgency', mobileController.listofAgency);

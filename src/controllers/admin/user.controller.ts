@@ -304,5 +304,35 @@ export default {
             let result = makeApiResponce('INTERNAL_SERVER_ERROR', 0, StatusCodes.INTERNAL_SERVER_ERROR, {});
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
         }
+    },
+    async listofAgents(req: Request, res: Response, next: NextFunction) {
+        try {
+            var user: IUser = await UserModel.find({ userType: 'Agent', delBit: false }).lean();
+            if (!user) {
+                let result = makeApiResponce('Agents Not Found', 1, StatusCodes.NOT_FOUND, {});
+                return res.status(StatusCodes.NOT_FOUND).json(result);
+            }
+            let result = makeApiResponce('Successfully', 1, StatusCodes.OK, user);
+            return res.status(StatusCodes.OK).json(result);
+        } catch (err) {
+            console.log(err);
+            let result = makeApiResponce('INTERNAL_SERVER_ERROR', 0, StatusCodes.INTERNAL_SERVER_ERROR, {});
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
+        }
+    },
+    async listofAgency(req: Request, res: Response, next: NextFunction) {
+        try {
+            var user: IUser = await UserModel.find({ userType: 'Agency', delBit: false }).lean();
+            if (!user) {
+                let result = makeApiResponce('Agents Not Found', 1, StatusCodes.NOT_FOUND, {});
+                return res.status(StatusCodes.NOT_FOUND).json(result);
+            }
+            let result = makeApiResponce('Successfully', 1, StatusCodes.OK, user);
+            return res.status(StatusCodes.OK).json(result);
+        } catch (err) {
+            console.log(err);
+            let result = makeApiResponce('INTERNAL_SERVER_ERROR', 0, StatusCodes.INTERNAL_SERVER_ERROR, {});
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
+        }
     }
 };

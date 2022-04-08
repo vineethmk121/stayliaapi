@@ -18,6 +18,7 @@ import { furnishingStatusRouter } from '../routes/admin/furnishingStatus.route';
 import { landStatusRouter } from '../routes/admin/landStatus.route';
 import { contructionStatusRouter } from '../routes/admin/contruction.route';
 import { nationalitiesRouter } from '../routes/admin/nationalities.route';
+import { specialitiesRouter } from '../routes/admin/specialities.route';
 
 export const adminRouter = express.Router();
 
@@ -40,3 +41,4 @@ adminRouter.use('/furnishingStatus', furnishingStatusRouter);
 adminRouter.use('/landStatus', landStatusRouter);
 adminRouter.use('/contructionStatus', contructionStatusRouter);
 adminRouter.use('/nationality', nationalitiesRouter);
+adminRouter.use('/specialities', specialitiesRouter);

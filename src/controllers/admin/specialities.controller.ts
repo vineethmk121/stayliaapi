@@ -22,7 +22,7 @@ export default {
             const specialities: specialitiesData = new specialitiesModel(req.body);
             specialities.createdBy = req.user;
             if (req.file) {
-                specialities.specialtyIcon = `${devConfig.getImagesPath.specialityIcon}/` + req.file.filename;
+                specialities.specialtyIcon = `${devConfig.getImagesPath.specialtyIcon}/` + req.file.filename;
             }
             await specialities.save();
             var specialitiesResponce: any = {
