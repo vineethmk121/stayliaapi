@@ -26,6 +26,7 @@ var storage = diskStorage({
         }
 
         console.log(upload_dir);
+
         sync(upload_dir); //create directories if not exist
         cb(null, upload_dir);
     },
@@ -36,6 +37,8 @@ var storage = diskStorage({
         cb(null, filename);
     }
 });
+
+console.log(storage);
 
 var upload = multer({
     storage: storage

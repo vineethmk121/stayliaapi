@@ -22,7 +22,6 @@ export default interface IUser extends Document {
     emailVerified: String;
     socialType: String;
     socialToken: String;
-    roleId: String;
 }
 export default interface UserRights extends Document {
     id: String;
@@ -53,27 +52,40 @@ export default interface propertyData extends Document {
     discountPrice: Number;
     deposite: Number;
     rent: Number;
-    additionalInfo: any;
-    propertyType: String;
+    totalBedRooms: Number;
+    totalBatRooms: Number;
+    totalRoomCounts: Number;
+    propertyCode: String;
+    licenseNumber: String;
+    permit: String;
+    propertyAge: String;
+    areaId: String;
+    areaSqrFt: String;
+    setAsFeature: String;
+    listedDate: String;
+    neighbourHood: String;
+    additionalInfo: [any];
+    propertyType: [any];
     overView: [any];
     amenities: [any];
     bedRoomTypes: [any];
     furnishingTypes: [any];
     tags: [any];
-    contructonId: any;
-    landStatusId: any;
-    areaRangeId: any;
-    furnishingStatusId: any;
-    priceRangeId: any;
-    gallaryImages: String;
-    sliderImages: String;
-    propertyPlan: String;
+    gallaryImages: any;
+    sliderImages: any;
+    propertyPlan: any;
     agency: any;
     agent: any;
+    contructonId: String;
+    landStatusId: String;
+    furnishingStatusId: String;
+    propertySaleType: String;
+    address: String;
     isApproved: Boolean;
     createdBy: any;
     updatedBy: any;
-    address: String;
+    lat: any;
+    lng: any;
     location: {
         type: {
             type: String;
@@ -122,6 +134,7 @@ export default interface mobilePropertyData extends Document {
     address: String;
     lat: String;
     long: String;
+    totalUserProperty: any;
     location: {
         type: {
             type: String;

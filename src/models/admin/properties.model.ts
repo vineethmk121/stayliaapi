@@ -9,8 +9,7 @@ const PropertySchema = new Schema(
         },
         description: {
             type: String,
-            minlength: 8,
-            maxlength: 255
+            require: false
         },
         flatNumber: {
             type: String,
@@ -50,6 +49,51 @@ const PropertySchema = new Schema(
         },
         rent: {
             type: Number
+        },
+        totalBedRooms: {
+            type: Number
+        },
+        totalBatRooms: {
+            type: Number
+        },
+        totalRoomCounts: {
+            type: Number
+        },
+        propertyCode: {
+            type: String,
+            required: false
+        },
+        licenseNumber: {
+            type: String,
+            required: false
+        },
+        permit: {
+            type: String,
+            required: false
+        },
+        propertyAge: {
+            type: String,
+            required: false
+        },
+        areaId: {
+            type: String,
+            required: false
+        },
+        areaSqrFt: {
+            type: String,
+            required: false
+        },
+        setAsFeature: {
+            type: String,
+            required: false
+        },
+        listedDate: {
+            type: String,
+            required: false
+        },
+        neighbourHood: {
+            type: String,
+            required: false
         },
         additionalInfo: [
             {
@@ -131,28 +175,21 @@ const PropertySchema = new Schema(
             default: false
         },
         contructonId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'contructionStatus',
+            // type: mongoose.Schema.Types.ObjectId,
+            // ref: 'contructionStatus',
+            type: String,
             default: false
         },
         landStatusId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'landStatus',
+            // type: mongoose.Schema.Types.ObjectId,
+            // ref: 'landStatus',
+            type: String,
             default: false
         },
         furnishingStatusId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'furnishingStatus',
-            default: false
-        },
-        priceRangeId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'priceRange',
-            default: false
-        },
-        areaRangeId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'areaRange',
+            // type: mongoose.Schema.Types.ObjectId,
+            // ref: 'furnishingStatus',
+            type: String,
             default: false
         },
         isApproved: {
@@ -170,7 +207,7 @@ const PropertySchema = new Schema(
         },
         propertySaleType: {
             type: String,
-            enum: ['Buy', 'Rent', 'Personal'],
+            // enum: ['Buy', 'Rent', 'Personal'],
             default: 'Personal'
         },
         address: {

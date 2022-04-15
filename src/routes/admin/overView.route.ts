@@ -7,7 +7,7 @@ export const overViewRouter: express.Router = express.Router();
 overViewRouter.use(passport.authenticate('adminUser', { session: false, failureRedirect: '/failure' }));
 
 overViewRouter.post('/addOverView', upload.single('overViewIcon'), overViewController.addOverView);
-overViewRouter.put('/updateOverView/:id', overViewController.updateOverView);
+overViewRouter.post('/updateOverView/:id', upload.single('overViewIcon'), overViewController.updateOverView);
 overViewRouter.get('/viewOverView/:id', overViewController.viewOverView);
 overViewRouter.get('/allOverViews', overViewController.getAllOverViews);
 overViewRouter.delete('/deleteOverView/:id', overViewController.deleteOverView);

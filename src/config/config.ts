@@ -5,8 +5,9 @@ dotenv.config({ path: '.env' });
 //const BASE_IMAGE_URL = "https://appcrates.net:"+process.env.PORT;
 //const ROUTE_IMAGE_PATH = "dist/uploads/images" //FOR BUILD
 
-const BASE_IMAGE_URL = 'http://localhost:5555';
-const ROUTE_IMAGE_PATH = 'src/uploads/images'; //FOR DEV
+// const BASE_IMAGE_URL = 'http://3.220.65.121:5554';
+const BASE_IMAGE_URL = 'https://gb.staylia.com:5555';
+const ROUTE_IMAGE_PATH = '/var/staylia/dist/uploads/images'; //FOR DEV
 
 export const devConfig: any = {
     port: process.env.PORT,

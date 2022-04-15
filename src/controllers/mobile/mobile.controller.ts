@@ -24,11 +24,6 @@ import bedRoomTypeModel from '../../models/admin/bedRoomType.model';
 import furnishingTypeModel from '../../models/admin/furnishingType.model';
 import tagsModel from '../../models/admin/tags.model';
 import agencyModel from '../../models/admin/agency.model';
-import contructionStatusModel from '../../models/admin/contruction.model';
-import priceRangeModel from '../../models/admin/priceRange.model';
-import landStatusModel from '../../models/admin/lanStatus.model';
-import furnishingStatusModel from '../../models/admin/furnishingStatus.model';
-import areaRangeModel from '../../models/admin/areaRange.model';
 
 export default {
     /************** MOBILE AUTH *************/
@@ -40,7 +35,7 @@ export default {
                 let result = makeApiResponce(error.message, 0, StatusCodes.BAD_REQUEST, {});
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
-            var randomOtp = await randomValueHex('6');
+            var randomOtp = await randomValueHex('4');
 
             if (devConfig.accountSid && devConfig.authToken && devConfig.myNumber && devConfig.twilioNumber) {
                 var client = new Twilio(devConfig.accountSid, devConfig.authToken);
@@ -49,10 +44,13 @@ export default {
                     to: req.body.mobile,
                     body: `You just received an otp on your cell number!${randomOtp}`
                 });
-                console.error('Successfully');
+                console.log(client);
+                // console.error('Successfully');
             } else {
+                console.log("error");
                 console.error('You are missing one of the variables you need to send a message');
             }
+
 
             const isUserExists = await UserModel.findOne({
                 mobile: req.body.mobile
@@ -61,15 +59,15 @@ export default {
                 isUserExists.otp = randomOtp;
                 //isUserExists.fcmToken = req.body.fcmToken;
                 await isUserExists.save();
-                let result = makeApiResponce('OTP Send To User', 1, StatusCodes.OK, isUserExists);
-                return res.status(StatusCodes.OK).json(result);
+                    let result = makeApiResponce('OTP Send To User', 1, StatusCodes.OK, isUserExists);
+                    return res.status(StatusCodes.OK).json(result);
             } else {
                 const user: any = new UserModel(req.body);
                 user.userType = 'appUser';
                 user.otp = randomOtp;
                 //user.fcmToken = req.body.fcmToken;
                 await user.save();
-                let result = makeApiResponce('User Created Successfully', 1, StatusCodes.OK, user);
+                let result = makeApiResponce('User Created Successfully', 11, StatusCodes.OK, user);
                 return res.status(StatusCodes.OK).json(result);
             }
         } catch (error) {
@@ -118,7 +116,7 @@ export default {
         //     return res.status(StatusCodes.BAD_REQUEST).json(result);
         // }
 
-        var randomOtp = await randomValueHex('6');
+        var randomOtp = await randomValueHex('4');
         user.otp = randomOtp;
         if (devConfig.accountSid && devConfig.authToken && devConfig.myNumber && devConfig.twilioNumber) {
             var client = new Twilio(devConfig.accountSid, devConfig.authToken);
@@ -130,6 +128,7 @@ export default {
         } else {
             console.error('You are missing one of the variables you need to send a message');
         }
+
 
         await user.save();
         let id = user._id;
@@ -145,6 +144,7 @@ export default {
             userType: user.userType,
             Mobile: user.mobile,
             gender: user.gender,
+            otp: user.otp,
             token: token
         };
         let result = makeApiResponce('Verified otp send Successfully', 1, StatusCodes.OK, userResponce);
@@ -336,7 +336,14 @@ export default {
                 .populate('amenities')
                 .populate('overView')
                 .populate('additionalInfo')
+                .populate('createdBy')
                 .lean();
+
+            let userId = propertyCheck.createdBy._id;
+            const userCount: mobilePropertyData = await propertyModel.find({ createdBy: userId }).count().lean();
+            propertyCheck['totalUserProperty'] = userCount;
+            // propertyCheck.totalUserProperty = userCount;
+            console.log(userCount);
             if (!propertyCheck) {
                 let result = makeApiResponce('Property Not Found', 1, StatusCodes.NOT_FOUND, {});
                 return res.status(StatusCodes.NOT_FOUND).json(result);
@@ -406,7 +413,7 @@ export default {
     },
     async savePropertyByUser(req: Request, res: Response, next: NextFunction) {
         try {
-            let checkSaveProperty: savePropertyData = await savePropertyModel.findOne({ userId: req.user, propertyId: req.body.propertyId }).populate('propertyId').populate('userId').lean();
+            let checkSaveProperty: savePropertyData = await savePropertyModel.findOne({ userId: req.user, propertyId: req.body.propertyId }).lean();
             if (checkSaveProperty) {
                 let result = makeApiResponce('This Property already saved', 0, StatusCodes.CONFLICT, checkSaveProperty);
                 return res.status(StatusCodes.CONFLICT).json(result);
@@ -693,8 +700,7 @@ export default {
     },
     async nearByProperties(req: Request, res: Response, next: NextFunction) {
         try {
-            // var loc = [32.0953, 74.1856];
-            let loc = req.body.loc;
+            var loc = [32.0953, 74.1856];
 
             var locationquery = {
                 location: {
@@ -703,7 +709,7 @@ export default {
                             type: 'Point',
                             coordinates: loc
                         },
-                        $maxDistance: 50 * 1000
+                        $maxDistance: 50
                     }
                 }
             };
@@ -723,130 +729,6 @@ export default {
                 return res.status(StatusCodes.NOT_FOUND).json(result);
             }
             let result = makeApiResponce('List of properties Against AgentID Found Successfully!', 1, StatusCodes.OK, nearByProperty);
-            return res.status(StatusCodes.OK).json(result);
-        } catch (err) {
-            console.log(err);
-            let result = makeApiResponce('INTERNAL_SERVER_ERROR', 0, StatusCodes.INTERNAL_SERVER_ERROR, {});
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
-        }
-    },
-    async filterPropertiesBilal(req: Request, res: Response, next: NextFunction) {
-        try {
-            let propertyTypeFilter;
-            let bedRoomsFilter;
-            let furnishingStatusFilter;
-            let landStatusFilter;
-            let constructionStatusFilter;
-            let sellingPriceFilter;
-            let postedByFilter;
-            let areaFilter;
-            let amenitiesFilter;
-            let { propertyType, minPrice, maxPrice, minArea, maxArea, amenities, bedRooms, furnishingStatus, landStatus, constructionStatus, postedBy } = req.body;
-
-            if (propertyType) {
-                // propertyTypeFilter = { propertyType: propertyType };
-                propertyTypeFilter = { propertyType: { $in: propertyType } };
-            } else {
-                propertyTypeFilter = {};
-            }
-
-            if (bedRooms) {
-                bedRoomsFilter = { bedRooms: bedRooms };
-            } else {
-                bedRoomsFilter = {};
-            }
-
-            if (postedBy) {
-                postedByFilter = { postedBy: postedBy };
-            } else {
-                postedByFilter = {};
-            }
-
-            if (furnishingStatus) {
-                furnishingStatusFilter = { furnishingStatusId: furnishingStatus };
-            } else {
-                furnishingStatusFilter = {};
-            }
-            if (landStatus) {
-                landStatusFilter = { landStatusId: landStatus };
-            } else {
-                landStatusFilter = {};
-            }
-            if (constructionStatus) {
-                constructionStatusFilter = { contructonId: constructionStatus };
-            } else {
-                constructionStatusFilter = {};
-            }
-
-            if (minPrice && maxPrice) {
-                sellingPriceFilter = { sellingPrice: { $gte: minPrice, $lte: maxPrice } };
-            } else {
-                sellingPriceFilter = {};
-            }
-
-            if (minArea && maxArea) {
-                areaFilter = { propertyArea: { $gte: minArea, $lte: maxArea } };
-            } else {
-                areaFilter = {};
-            }
-
-            if (amenities) {
-                amenitiesFilter = { amenities: { $in: amenities } };
-            } else {
-                amenitiesFilter = {};
-            }
-
-            let query = {
-                $and: [propertyTypeFilter, bedRoomsFilter, furnishingStatusFilter, landStatusFilter, constructionStatusFilter, sellingPriceFilter, postedByFilter, areaFilter, amenitiesFilter]
-            };
-
-            let getProperties = await propertiesModel
-                .find(query)
-                // .populate('propertyId')
-                .populate('agent')
-                .populate('amenities')
-                .populate('country')
-                .populate('additionalInfo')
-                .populate('overView')
-                .populate('bedRoomTypes')
-                .populate('furnishingTypes')
-                .populate('tags')
-                .lean();
-            if (!getProperties) {
-                let result = makeApiResponce('Properties Not Found', 0, StatusCodes.NOT_FOUND, getProperties);
-                return res.status(StatusCodes.NOT_FOUND).json(result);
-            }
-            let result = makeApiResponce('List of Properties Successfully!', 1, StatusCodes.OK, getProperties);
-            return res.status(StatusCodes.OK).json(result);
-        } catch (err) {
-            console.log(err);
-            let result = makeApiResponce('INTERNAL_SERVER_ERROR', 0, StatusCodes.INTERNAL_SERVER_ERROR, {});
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
-        }
-    },
-    async listofPropertyFilter(req: Request, res: Response, next: NextFunction) {
-        try {
-            let furnish = await furnishingStatusModel.find({ delBit: false }).lean();
-
-            let contruction = await contructionStatusModel.find({ delBit: false }).lean();
-
-            let land = await landStatusModel.find({ delBit: false }).lean();
-
-            let priceRange = await priceRangeModel.find({ delBit: false }).lean();
-
-            let areaRange = await areaRangeModel.find({ delBit: false }).lean();
-
-            let amenity = await amenitiesModel.find({ delBit: false }).lean();
-
-            let filterArray = {
-                furnish: furnish,
-                contruction: contruction,
-                land: land,
-                priceRange: priceRange,
-                areaRange: areaRange,
-                amenity: amenity
-            };
-            let result = makeApiResponce('Agent has been saved!', 1, StatusCodes.OK, filterArray);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -902,6 +784,30 @@ export default {
                 return res.status(StatusCodes.NOT_FOUND).json(result);
             }
             let result = makeApiResponce('Successfully', 1, StatusCodes.OK, user);
+            return res.status(StatusCodes.OK).json(result);
+        } catch (err) {
+            console.log(err);
+            let result = makeApiResponce('INTERNAL_SERVER_ERROR', 0, StatusCodes.INTERNAL_SERVER_ERROR, {});
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(result);
+        }
+    },
+    async featureProperties(req: Request, res: Response, next: NextFunction) {
+        try {
+            var propertyCheck: mobilePropertyData = await propertyModel
+                .find({ setAsFeature: 'true' })
+                .populate('country')
+                .populate('tags')
+                .populate('furnishingTypes')
+                .populate('bedRoomTypes')
+                .populate('amenities')
+                .populate('overView')
+                .populate('additionalInfo')
+                .lean();
+            if (!propertyCheck) {
+                let result = makeApiResponce('Property Not Found', 1, StatusCodes.NOT_FOUND, {});
+                return res.status(StatusCodes.NOT_FOUND).json(result);
+            }
+            let result = makeApiResponce('Property Founds Successfully', 1, StatusCodes.OK, propertyCheck);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);

@@ -14,61 +14,48 @@ export default {
                 let result = makeApiResponce(error.message, 0, StatusCodes.BAD_REQUEST, {});
                 return res.status(StatusCodes.BAD_REQUEST).json(result);
             }
-            const checkProperty: propertyData = await propertyModel.findOne({ title: req.body.title }).lean();
-            if (checkProperty) {
-                let result = makeApiResponce('This Property is Already Exsit, Please try another property!', 1, StatusCodes.BAD_REQUEST, {});
-                return res.status(StatusCodes.BAD_REQUEST).json(result);
-            }
-            const property: propertyData = new propertyModel(req.body);
+            // const checkProperty: propertyData = await propertyModel.findOne({ title: req.body.title }).lean();
+            // if (checkProperty) {
+            //     let result = makeApiResponce('This Property is Already Exsit, Please try another property!', 1, StatusCodes.BAD_REQUEST, {});
+            //     return res.status(StatusCodes.BAD_REQUEST).json(result);
+            // }
+            
+            const gallaryImages: string[] = [];
+            const sliderImages: string[] = [];
+            const propertyPlan: string[] = [];
+
+            // const property: propertyData = new propertyModel(req.body);
+            const property: propertyData = new propertyModel({
+                ...req.body,
+                location: {
+                    type: 'Point',
+                    coordinates: [req.body.lat, req.body.lng]
+                }
+            });
             property.createdBy = req.user;
             if (req.files) {
                 for (var i = 0; i < req.files.length; i++) {
                     if (req.files[i].fieldname == 'gallaryImages') {
-                        property.gallaryImages = `${devConfig.getImagesPath.gallaryImages}/` + req.files[i].filename;
+                        let gallaryImageValues = `${devConfig.getImagesPath.gallaryImages}/` + req.files[i].filename;
+                        gallaryImages.push(gallaryImageValues);
                     }
                     if (req.files[i].fieldname == 'sliderImages') {
-                        property.sliderImages = `${devConfig.getImagesPath.sliderImages}/` + req.files[i].filename;
+                        let sliderImageValues = `${devConfig.getImagesPath.sliderImages}/` + req.files[i].filename;
+                        sliderImages.push(sliderImageValues);
                     }
                     if (req.files[i].fieldname == 'propertyPlan') {
-                        property.propertyPlan = `${devConfig.getImagesPath.propertyPlan}/` + req.files[i].filename;
+                        let propertyPlanValues = `${devConfig.getImagesPath.propertyPlan}/` + req.files[i].filename;
+                        propertyPlan.push(propertyPlanValues);
                     }
                 }
             }
+
+            property.gallaryImages = gallaryImages;
+            property.sliderImages = sliderImages;
+            property.propertyPlan = propertyPlan;
             await property.save();
-            var propertyResponce: any = {
-                _id: property._id,
-                title: property.title,
-                description: property.description,
-                flatNumber: property.flatNumber,
-                street: property.street,
-                city: property.city,
-                state: property.state,
-                country: property.country,
-                countryCode: property.countryCode,
-                sellingPrice: property.sellingPrice,
-                discountPrice: property.discountPrice,
-                deposite: property.deposite,
-                rent: property.rent,
-                additionalInfo: property.additionalInfo,
-                propertyType: property.propertyType,
-                overView: property.overView,
-                amenities: property.amenities,
-                bedRoomTypes: property.bedRoomTypes,
-                furnishingTypes: property.furnishingTypes,
-                tags: property.tags,
-                contructonId: property.contructonId,
-                landStatusId: property.landStatusId,
-                furnishingStatusId: property.furnishingStatusId,
-                priceRangeId: property.priceRangeId,
-                areaRangeId: property.areaRangeId,
-                gallaryImages: property.gallaryImages,
-                sliderImages: property.sliderImages,
-                propertyPlan: property.propertyPlan,
-                agency: property.agency,
-                agent: property.agent,
-                createdBy: property.createdBy
-            };
-            let result = makeApiResponce('New Property Added Successfully', 1, StatusCodes.OK, propertyResponce);
+            
+            let result = makeApiResponce('New Property Added Successfully', 1, StatusCodes.OK, property);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -87,11 +74,6 @@ export default {
                 .populate('amenities')
                 .populate('overView')
                 .populate('additionalInfo')
-                .populate('contructonId')
-                .populate('landStatusId')
-                .populate('furnishingStatusId')
-                .populate('areaRangeId')
-                .populate('priceRangeId')
                 .lean();
             if (!propertyCheck) {
                 let result = makeApiResponce('Property Not Found', 1, StatusCodes.NOT_FOUND, {});
@@ -116,11 +98,6 @@ export default {
                 .populate('amenities')
                 .populate('overView')
                 .populate('additionalInfo')
-                .populate('contructonId')
-                .populate('landStatusId')
-                .populate('furnishingStatusId')
-                .populate('areaRangeId')
-                .populate('priceRangeId')
                 .lean();
             if (!propertyCheck) {
                 let result = makeApiResponce('Property Not Found', 1, StatusCodes.NOT_FOUND, {});

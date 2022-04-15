@@ -87,7 +87,6 @@ export default {
                 building: user.building,
                 state: user.state,
                 locality: user.locality,
-                roleId: user.roleId,
                 country: user.country,
                 createdBy: user.createdBy
             };
@@ -96,18 +95,18 @@ export default {
             if (emailConfirmation.emailVerified == 'true') {
                 let result = makeApiResponce('User Already Verified!', 1, StatusCodes.OK, { emailConfirmation });
             } else if (emailConfirmation.emailVerified != 'false') {
-                const userId = emailConfirmation._id;
-                const link = `http://localhost:5555/verifyEmail/${user._id}`;
-                const confirmationLink = `<img style="width: 150px;" src="https://api.metomasnota.com/maillogo.png">
-                    <h4>Hi ${emailConfirmation.fName}</h4>
-                    <p>Here is your confirmation Email link.Click here. <span style="font-weight:bold">${link}</span> Please Verify Your Email!</a></p>`;
+                // const userId = emailConfirmation._id;
+                // const link = `http://localhost:5555/verifyEmail/${user._id}`;
+                // const confirmationLink = `<img style="width: 150px;" src="https://api.metomasnota.com/maillogo.png">
+                //     <h4>Hi ${emailConfirmation.fName}</h4>
+                //     <p>Here is your confirmation Email link.Click here. <span style="font-weight:bold">${link}</span> Please Verify Your Email!</a></p>`;
 
-                const mailResponce = await sendEmail({
-                    html: confirmationLink,
-                    subject: 'Please Verify Your Email!',
-                    email: emailConfirmation.email
-                });
-                console.log(mailResponce);
+                // const mailResponce = await sendEmail({
+                //     html: confirmationLink,
+                //     subject: 'Please Verify Your Email!',
+                //     email: emailConfirmation.email
+                // });
+                // console.log(mailResponce);
                 let result = makeApiResponce('Pending Account! Verification Link sent to your Email, Please Verify Your Email!', 1, StatusCodes.OK, {});
                 return res.status(StatusCodes.OK).json(result);
             }

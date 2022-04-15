@@ -58,10 +58,10 @@ export default {
         try {
             var specialities: specialitiesData = await specialitiesModel.find({ delBit: false }).lean();
             if (!specialities) {
-                let result = makeApiResponce('Amenities Not Found', 1, StatusCodes.NOT_FOUND, {});
+                let result = makeApiResponce('Specialities Not Found', 1, StatusCodes.NOT_FOUND, {});
                 return res.status(StatusCodes.NOT_FOUND).json(result);
             }
-            let result = makeApiResponce('Amenities Found Successfully', 1, StatusCodes.OK, specialities);
+            let result = makeApiResponce('Specialities Found Successfully', 1, StatusCodes.OK, specialities);
             return res.status(StatusCodes.OK).json(result);
         } catch (err) {
             console.log(err);
@@ -73,7 +73,7 @@ export default {
         try {
             req.body.updatedBy = req.user;
             if (req.file) {
-                req.body.specialtyIcon = `${devConfig.getImagesPath.specialityIcon}/` + req.file.filename;
+                req.body.specialtyIcon = `${devConfig.getImagesPath.specialtyIcon}/` + req.file.filename;
             }
             var specialities: specialitiesData = await specialitiesModel.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-password').lean();
             if (!specialities) {

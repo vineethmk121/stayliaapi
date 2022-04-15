@@ -7,7 +7,7 @@ const UserSchema = new Schema(
             type: String,
             require: false,
             lowercase: true,
-            unique: true
+            unique: false
         },
         password: {
             type: String,
@@ -119,11 +119,6 @@ const UserSchema = new Schema(
         },
         socialToken: {
             type: String,
-            require: false
-        },
-        roleId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'role',
             require: false
         }
     },
